@@ -1,0 +1,5 @@
+# Hashes of file build rules.
+db758f0814e2a33a49ffd31fde46ba69 CMakeFiles/fetch-translations
+a9ecc373901d0c5e34df3efee22466ef CMakeFiles/pw_monitor_toolplugin_autogen
+b27eb4709c29353f19a872aa4a127741 CMakeFiles/uninstall
+73c83abcd8e798e37b06e36a12602259 releaseme

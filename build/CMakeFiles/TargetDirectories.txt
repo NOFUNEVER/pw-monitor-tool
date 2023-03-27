@@ -1,0 +1,17 @@
+/home/jkl/monitor-tool/build/CMakeFiles/uninstall.dir
+/home/jkl/monitor-tool/build/CMakeFiles/fetch-translations.dir
+/home/jkl/monitor-tool/build/CMakeFiles/KF5Plasma_QCH.dir
+/home/jkl/monitor-tool/build/CMakeFiles/KF5Package_QCH.dir
+/home/jkl/monitor-tool/build/CMakeFiles/KF5CoreAddons_QCH.dir
+/home/jkl/monitor-tool/build/CMakeFiles/KF5Config_QCH.dir
+/home/jkl/monitor-tool/build/CMakeFiles/KF5Service_QCH.dir
+/home/jkl/monitor-tool/build/CMakeFiles/KF5WindowSystem_QCH.dir
+/home/jkl/monitor-tool/build/CMakeFiles/pw_monitor_toolplugin.dir
+/home/jkl/monitor-tool/build/CMakeFiles/test.dir
+/home/jkl/monitor-tool/build/CMakeFiles/edit_cache.dir
+/home/jkl/monitor-tool/build/CMakeFiles/rebuild_cache.dir
+/home/jkl/monitor-tool/build/CMakeFiles/list_install_components.dir
+/home/jkl/monitor-tool/build/CMakeFiles/install.dir
+/home/jkl/monitor-tool/build/CMakeFiles/install/local.dir
+/home/jkl/monitor-tool/build/CMakeFiles/install/strip.dir
+/home/jkl/monitor-tool/build/CMakeFiles/pw_monitor_toolplugin_autogen.dir

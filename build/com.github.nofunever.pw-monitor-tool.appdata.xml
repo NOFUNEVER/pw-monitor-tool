@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="addon">
+    <id>com.github.nofunever.pw-monitor-tool</id>
+    <extends>org.kde.plasmashell</extends>
+    <name>PW Monitor Tool</name>
+    <summary>A widget to simplfy monitoring inputs with pw-loopback</summary>
+    <url type="homepage">https://github.com/nofunever/plasmoid-pw-monitor-tool</url>
+    <developer_name>Jason K Lamphere &lt;jason.lamphere@gmail.com&gt;</developer_name>
+    <icon type="stock">battery</icon>
+    <project_license></project_license>
+    <metadata_license>CC0-1.0</metadata_license>
+</component>

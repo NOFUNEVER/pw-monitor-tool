@@ -1,0 +1,23 @@
+
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "jason.lamphere@gmail.com",
+                "Name": "Jason K Lamphere"
+            }
+        ],
+        "Category": "Audio Tool",
+        "Description": "A widget to simplfy monitoring inputs with pw-loopback",
+        "Icon": "battery",
+        "Id": "com.github.nofunever.pw_monitor_tool",
+        "Name": "PW Monitor Tool",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "1",
+        "Website": "https://github.com/nofunever/plasmoid-pw_monitor_tool"
+    },
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-MainScript": "ui/main.qml"
+}
