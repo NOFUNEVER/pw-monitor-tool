@@ -10,6 +10,59 @@ import com.github.nofunever.pw_monitor_tool 1.0
 
 
 ColumnLayout {
+
+
+        Process {
+        id: list_inputs
+
+
+        property string output: ""
+
+
+        onStarted: print("Gettings Inputs")
+        onFinished: print("Inputs Collected")
+
+        onErrorOccurred: console.log("Error Ocuured: ", error)
+
+        onReadyReadStandardOutput: {
+            output = list_inputs.readAll()
+     //       txt.text += output
+        }
+    }
+
+
+
+        Process {
+        id: list_outputs
+
+
+        property string output: ""
+
+
+        onStarted: print("Gettings Inputs")
+        onFinished: print("Inputs Collected")
+
+        onErrorOccurred: console.log("Error Ocuured: ", error)
+
+        onReadyReadStandardOutput: {
+            output = list_outputs.readAll()
+     //       txt.text += output
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     Process {
         id: pw_cli
 
@@ -42,6 +95,9 @@ ColumnLayout {
        //     txt.text += output
         }
     }
+
+
+
     PlasmaComponents3.RadioButton {
         property var argz: ["pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | sed '2,$d' | cut -f1 -d"," | cut -c 5-)"]
         text: i18n("Off")
@@ -56,6 +112,8 @@ ColumnLayout {
     }
     PlasmaComponents3.RadioButton {
 
+
+
         text: i18n("Loopback Defaults")
         autoExclusive: true
         onClicked: {
@@ -66,6 +124,8 @@ ColumnLayout {
     }
 RowLayout{
 PlasmaComponents3.ComboBox {
+    //property ListModel inputs : {}
+    //list_inputs.start("/home/jkl/monitor-tool/list_inputs.sh")
     textRole: "text"
     valueRole: "value"
     model: [
@@ -77,6 +137,8 @@ PlasmaComponents3.ComboBox {
 
 
 PlasmaComponents3.ComboBox {
+   // property ListModel outputs : {}
+   //  list_outputs.start("/home/jkl/monitor-tool/list_outputs.sh")
     textRole: "text"
     valueRole: "value"
     model: [
