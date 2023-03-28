@@ -12,7 +12,7 @@ ColumnLayout {
 
 
     width: 400
-    height: 680
+    height: 980
 
 
     Process {
@@ -142,6 +142,9 @@ ColumnLayout {
     }
 
 
+  ButtonGroup {
+        id: group
+    }
 
     PlasmaComponents3.RadioButton {
         width: 200
@@ -180,7 +183,7 @@ ColumnLayout {
 
       //  property var argz: ["-l", "1", "-n", in_var[2] + out_var[3], "-m", "'[FL FR ]'", "--capture="+in_var[2], "--playback="+out_var[3], "&" ]
         width: 200
-        text: i18n("Loopback Test")
+        text: i18n("Loopback Selected")
         autoExclusive: true
         onClicked: {
         in_index = inputComboBox.currentIndex
@@ -240,7 +243,22 @@ PlasmaComponents3.ComboBox {
 PlasmaComponents3.Button {
     icon.name: "view-refresh"
     text: i18n("Enable/Add")
+
+
+        onClicked: {
+            var button = Qt.createQmlObject('import QtQuick.Controls 2.0; RadioButton { text: "New Favorite"}', group)
+            print("clicked")
+            group.addButton(button)
+        }
 }
+
+
+
+
+
+
+
+
 
 }
 
