@@ -2,7 +2,7 @@
 #pragma once
 #include <QProcess>
 #include <QVariant>
-//#include <QtMultimedia>
+
 
 class Process : public QProcess
 {
