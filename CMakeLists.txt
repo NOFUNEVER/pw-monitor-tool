@@ -16,6 +16,7 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 find_package(Qt5 REQUIRED COMPONENTS
     Core
     Qml
+    Multimedia
 )
 
 find_package(KF5 REQUIRED COMPONENTS

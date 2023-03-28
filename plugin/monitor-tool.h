@@ -2,6 +2,7 @@
 #pragma once
 #include <QProcess>
 #include <QVariant>
+//#include <QtMultimedia>
 
 class Process : public QProcess
 {
@@ -14,12 +15,13 @@ public:
     {
         QStringList args;
 
+
         // convert QVariantList from QML to QStringList for QProcess
         for ( const auto& temp : arguments ) {
             args << temp.toString();
         }
 
-        QProcess::setProcessChannelMode( QProcess::MergedChannels );
+        QProcess::setProcessChannelMode( QProcess::ForwardedChannels );
         QProcess::start( program, args );
     }
 
