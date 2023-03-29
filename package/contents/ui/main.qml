@@ -29,7 +29,7 @@ ColumnLayout {
         onReadyReadStandardOutput: {
             input_output = list_inputs.readAll()
             input_split =input_output.split("\n")
-           // input_txt.text = input_split[1]
+
         }
     }
 
@@ -45,9 +45,9 @@ ColumnLayout {
         onErrorOccurred: console.log("Error Ocuured: ", error)
 
         onReadyReadStandardOutput: {
-             output_output = list_outputs.readAll()
+            output_output = list_outputs.readAll()
             output_split =output_output.split("\n")
-          //  output_txt.text = output_split[1]
+
         }
     }
      Process {
@@ -64,7 +64,7 @@ ColumnLayout {
         onReadyReadStandardOutput: {
             input_output_internal = list_inputs_internal.readAll()
             input_split_internal =input_output_internal.split("\n")
-           // input_txt.text = input_split[1]
+
         }
     }
 
@@ -82,15 +82,14 @@ ColumnLayout {
         onReadyReadStandardOutput: {
              output_output_internal = list_outputs_internal.readAll()
             output_split_internal =output_output_internal.split("\n")
-          //  output_txt.text = output_split[1]
+
         }
     }
 
   Process {
         id: pw_loopback
 
-    //    property string input_output_internal: ""
-    //    property var input_split_internal: ""
+
 
         onStarted: print("Started pw_loopback")
         onFinished: print("Closed pw_loopback")
@@ -98,16 +97,12 @@ ColumnLayout {
         onErrorOccurred: console.log("Error Ocuured: ", error)
 
         onReadyReadStandardOutput: {
-         //   input_output_internal = list_inputs_internal.readAll()
-     //       input_split_internal =input_output_internal.split("\n")
-           // input_txt.text = input_split[1]
+
         }
     }
      Process {
         id: pw_loopback_selected
 
-    //    property string input_output_internal: ""
-    //    property var input_split_internal: ""
 
         onStarted: print("Started pw_loopback_selected")
         onFinished: print("Closed pw_loopback_selected")
@@ -115,9 +110,7 @@ ColumnLayout {
         onErrorOccurred: console.log("Error Ocuured: ", error)
 
         onReadyReadStandardOutput: {
-         //   input_output_internal = list_inputs_internal.readAll()
-     //       input_split_internal =input_output_internal.split("\n")
-           // input_txt.text = input_split[1]
+
         }
     }
 
@@ -136,14 +129,6 @@ ColumnLayout {
             }
         }
     }
-
-
-
-
-
-
-
-
 
 
     Process {
@@ -181,12 +166,6 @@ ColumnLayout {
               pw_loopback_selected.kill()
               destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
               destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
-             // destroy.kill()
-           //   list_inputs_internal.kill()
-           //   list_inputs.kill()
-          //    list_outputs_internal.kill()
-         //     list_outputs.kill()
-
         }
 
     }
@@ -197,7 +176,7 @@ ColumnLayout {
         text: i18n("Loopback Defaults")
         autoExclusive: true
         onClicked: {
-        //pw_loopback.start("/home/jkl/Documents/pipewire-scripts/monitor_line-in.sh")
+
         pw_loopback.start("pw-loopback")
 
         }
@@ -209,8 +188,6 @@ ColumnLayout {
         property var argz:{}
         property var in_index:{}
         property var out_index:{}
-
-      //  property var argz: ["-l", "1", "-n", in_var[2] + out_var[3], "-m", "'[FL FR ]'", "--capture="+in_var[2], "--playback="+out_var[3], "&" ]
         width: 200
         text: i18n("Loopback Selected")
         autoExclusive: true
@@ -221,16 +198,11 @@ ColumnLayout {
         out_var = "--playback="+list_outputs_internal.output_split_internal[out_index]
         print(in_var)
         print(out_var)
-          argz = ["-l", "1", "-n", "loopback", "-m", "[FL FR]",in_var , out_var ]
-       // argz = ["-l", "1", "-n", "sb-line-in", "-m", "[FL FR]", "--capture=alsa_input.pci-0000_0a_00.0.pro-input-0", "--playback=alsa_output.pci-0000_0a_00.0.pro-output-0"]
-        //argz = ["-l", "1", "-n", "bingo", "-m", "'[FL FR ]'", "--capture='" +in_var[2]+"'", "--playback='"+out_var[3]+"'", "&" ]
-        //pw_loopback.start("/home/jkl/Documents/pipewire-scripts/monitor_line-in.sh")
+        argz = ["-l", "1", "-n", "loopback", "-m", "[FL FR]",in_var , out_var ]
         pw_loopback_selected.start("pw-loopback", argz)
 
         }
     }
-
-
 
 
 
@@ -241,8 +213,6 @@ PlasmaComponents3.Label {
     PlasmaComponents3.ComboBox {
     width: 300
     height:30
-  //  textRole: "text"
-  //  valueRole: "value"
     id: inputComboBox
     model: list_inputs.input_split
     delegate: ItemDelegate {
@@ -257,8 +227,6 @@ PlasmaComponents3.Label {
 PlasmaComponents3.ComboBox {
     width: 300
     height:30
- //   textRole: "text"
-//    valueRole: "value"
     id: outputComboBox
     model: list_outputs.output_split
     delegate: ItemDelegate {
@@ -270,8 +238,6 @@ PlasmaComponents3.ComboBox {
 PlasmaComponents3.Button {
     icon.name: "view-refresh"
     text: i18n("Enable/Add")
-
-
         onClicked: {
             var button = Qt.createQmlObject('import QtQuick.Controls 2.0; RadioButton { text: "New Favorite"}', group)
             print("clicked")
