@@ -9,11 +9,11 @@ import com.github.nofunever.pw_monitor_tool 1.0
 
 
 ColumnLayout {
-
+Layout.margins: 20
 PlasmaComponents3.Label {
 Layout.alignment: Qt.AlignHCenter
 
-    text: i18n("PW-Loopback-UI")
+    text: i18n("Pipewire Loopback UI")
     height:30
 }
 
@@ -259,6 +259,7 @@ PlasmaComponents3.ComboBox {
 
     // button to add new radio button
     PlasmaComponents3.Button {
+        Layout.alignment: Qt.AlignRight
         property var in_var:{}
         property var out_var:{}
         property var in_var2:{}
