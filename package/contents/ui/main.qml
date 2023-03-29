@@ -92,8 +92,8 @@ ColumnLayout {
     //    property string input_output_internal: ""
     //    property var input_split_internal: ""
 
-        onStarted: print("Started pw_cli")
-        onFinished: print("Closed pw_cli")
+        onStarted: print("Started pw_loopback")
+        onFinished: print("Closed pw_loopback")
 
         onErrorOccurred: console.log("Error Ocuured: ", error)
 
@@ -109,8 +109,8 @@ ColumnLayout {
     //    property string input_output_internal: ""
     //    property var input_split_internal: ""
 
-        onStarted: print("Started pw_cli2")
-        onFinished: print("Closed pw_cli2")
+        onStarted: print("Started pw_loopback_selected")
+        onFinished: print("Closed pw_loopback_selected")
 
         onErrorOccurred: console.log("Error Ocuured: ", error)
 
