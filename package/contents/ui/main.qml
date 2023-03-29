@@ -108,10 +108,20 @@ ColumnLayout {
         Timer {
             interval: 500; running: true; repeat: false
             onTriggered:{
-                list_inputs.start("/home/jkl/monitor-tool/plugin/list_inputs.sh")
-                list_outputs.start("/home/jkl/monitor-tool/plugin/list_outputs.sh")
-                list_inputs_internal.start("/home/jkl/monitor-tool/plugin/list_inputs_internal.sh")
-                list_outputs_internal.start("/home/jkl/monitor-tool/plugin/list_outputs_internal.sh")
+              //  list_inputs.kill()
+            //    list_outputs.kill()
+            //    list_inputs_internal.kill()
+            //    list_outputs_internal.kill()
+
+                list_inputs.start("/home/eos_jlamphere/pw-monitor-tool/plugin/list_inputs.sh")
+                list_outputs.start("/home/eos_jlamphere/pw-monitor-tool/plugin/list_outputs.sh")
+                list_inputs_internal.start("/home/eos_jlamphere/pw-monitor-tool/plugin/list_inputs_internal.sh")
+                list_outputs_internal.start("/home/eos_jlamphere/pw-monitor-tool/plugin/list_outputs_internal.sh")
+
+               // list_inputs.start(Qt.resolvedUrl("~/pw-monitor-tool/plugin/list_inputs.sh"))
+              //  list_outputs.start(Qt.resolvedUrl("~/pw-monitor-tool/plugin/list_outputs.sh"))
+             //   list_inputs_internal.start(Qt.resolvedUrl("~/pw-monitor-tool/plugin/list_inputs_internal.sh"))
+             //   list_outputs_internal.start(Qt.resolvedUrl("~/pw-monitor-tool/plugin/list_outputs_internal.sh"))
             }
         }
     }
@@ -154,7 +164,7 @@ ColumnLayout {
         autoExclusive: true
               onClicked: {
 
-              destroy.start(Qt.resolvedUrl("~/monitor-tool/plugin/destroy.sh"))
+              destroy.start(Qt.resolvedUrl("~/pw-monitor-tool/plugin/destroy.sh"))
               pw_cli.kill()
               destroy.kill()
 
