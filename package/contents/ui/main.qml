@@ -230,10 +230,15 @@ PlasmaComponents3.Label {
     width: 300
     height:20
     id: inputComboBox
+
+    onModelChanged: {
+
+        Layout.minimumWidth =  100
+    }
     model: list_inputs.input_split
     delegate: ItemDelegate {
         text: modelData
-        width: 300
+        width: 400
         }
     }
     PlasmaComponents3.Label {
@@ -242,8 +247,14 @@ Layout.alignment: Qt.AlignLeft
     height:20
 }
 PlasmaComponents3.ComboBox {
+
+    onModelChanged: {
+
+       // Layout.minimumWidth = 40//_maxWidth + implicitIndicatorWidth + leftPadding + rightPadding
+    }
+
     Layout.alignment: Qt.AlignHCenter
-    width: 300
+    width: 200
     height:20
     id: outputComboBox
     model: list_outputs.output_split

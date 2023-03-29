@@ -1,4 +1,4 @@
-# Install script for directory: /home/jkl/pw-monitor-tool
+# Install script for directory: /home/eos_jlamphere/pw-monitor-tool
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -42,26 +42,26 @@ if(NOT DEFINED CMAKE_OBJDUMP)
   set(CMAKE_OBJDUMP "/usr/bin/objdump")
 endif()
 
-if(CMAKE_INSTALL_COMPONENT STREQUAL "plasmoid-pw_monitor_tool" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/plasma/plasmoids/com.github.nofunever.pw_monitor_tool" TYPE DIRECTORY FILES "/home/jkl/pw-monitor-tool/package/" REGEX "/\\.svn$" EXCLUDE REGEX "/[^/]*\\.qmlc$" EXCLUDE REGEX "/CMakeLists\\.txt$" EXCLUDE REGEX "/Messages\\.sh$" EXCLUDE REGEX "/dummydata$" EXCLUDE)
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xplasmoid-pw_monitor_toolx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/plasma/plasmoids/com.github.nofunever.pw_monitor_tool" TYPE DIRECTORY FILES "/home/eos_jlamphere/pw-monitor-tool/package/" REGEX "/\\.svn$" EXCLUDE REGEX "/[^/]*\\.qmlc$" EXCLUDE REGEX "/CMakeLists\\.txt$" EXCLUDE REGEX "/Messages\\.sh$" EXCLUDE REGEX "/dummydata$" EXCLUDE)
 endif()
 
-if(CMAKE_INSTALL_COMPONENT STREQUAL "plasmoid-pw_monitor_tool" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/plasma/plasmoids/com.github.nofunever.pw_monitor_tool" TYPE FILE FILES "/home/jkl/pw-monitor-tool/package/metadata.json")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xplasmoid-pw_monitor_toolx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/plasma/plasmoids/com.github.nofunever.pw_monitor_tool" TYPE FILE FILES "/home/eos_jlamphere/pw-monitor-tool/package/metadata.json")
 endif()
 
-if(CMAKE_INSTALL_COMPONENT STREQUAL "plasmoid-pw_monitor_tool" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/metainfo" TYPE FILE OPTIONAL FILES "/home/jkl/pw-monitor-tool/build/com.github.nofunever.pw_monitor_tool.appdata.xml")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xplasmoid-pw_monitor_toolx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/metainfo" TYPE FILE OPTIONAL FILES "/home/eos_jlamphere/pw-monitor-tool/build/com.github.nofunever.pw_monitor_tool.appdata.xml")
 endif()
 
-if(CMAKE_INSTALL_COMPONENT STREQUAL "plasmoid-pw_monitor_tool" OR NOT CMAKE_INSTALL_COMPONENT)
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xplasmoid-pw_monitor_toolx" OR NOT CMAKE_INSTALL_COMPONENT)
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/x86_64-linux-gnu/qt5/qml/com/github/nofunever/pw_monitor_tool/libpw_monitor_toolplugin.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/x86_64-linux-gnu/qt5/qml/com/github/nofunever/pw_monitor_tool/libpw_monitor_toolplugin.so")
     file(RPATH_CHECK
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/x86_64-linux-gnu/qt5/qml/com/github/nofunever/pw_monitor_tool/libpw_monitor_toolplugin.so"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/x86_64-linux-gnu/qt5/qml/com/github/nofunever/pw_monitor_tool" TYPE SHARED_LIBRARY FILES "/home/jkl/pw-monitor-tool/build/libpw_monitor_toolplugin.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/x86_64-linux-gnu/qt5/qml/com/github/nofunever/pw_monitor_tool" TYPE SHARED_LIBRARY FILES "/home/eos_jlamphere/pw-monitor-tool/build/libpw_monitor_toolplugin.so")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/x86_64-linux-gnu/qt5/qml/com/github/nofunever/pw_monitor_tool/libpw_monitor_toolplugin.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/x86_64-linux-gnu/qt5/qml/com/github/nofunever/pw_monitor_tool/libpw_monitor_toolplugin.so")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -70,11 +70,11 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "plasmoid-pw_monitor_tool" OR NOT CMAKE_INST
   endif()
 endif()
 
-if(CMAKE_INSTALL_COMPONENT STREQUAL "plasmoid-pw_monitor_tool" OR NOT CMAKE_INSTALL_COMPONENT)
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xplasmoid-pw_monitor_toolx" OR NOT CMAKE_INSTALL_COMPONENT)
 endif()
 
-if(CMAKE_INSTALL_COMPONENT STREQUAL "plasmoid-pw_monitor_tool" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/x86_64-linux-gnu/qt5/qml/com/github/nofunever/pw_monitor_tool" TYPE FILE FILES "/home/jkl/pw-monitor-tool/plugin/qmldir")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xplasmoid-pw_monitor_toolx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/x86_64-linux-gnu/qt5/qml/com/github/nofunever/pw_monitor_tool" TYPE FILE FILES "/home/eos_jlamphere/pw-monitor-tool/plugin/qmldir")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -85,5 +85,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/jkl/pw-monitor-tool/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/eos_jlamphere/pw-monitor-tool/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
