@@ -21,8 +21,8 @@ ColumnLayout {
         property string input_output: ""
         property var input_split: ""
 
-        onStarted: print("Started")
-        onFinished: print("Closed")
+        onStarted: print("Started list_inputs")
+        onFinished: print("Closed list_inputs")
 
         onErrorOccurred: console.log("Error Ocuured: ", error)
 
@@ -39,8 +39,8 @@ ColumnLayout {
         property string output_output: ""
         property var output_split: ""
 
-        onStarted: print("Started")
-        onFinished: print("Closed")
+        onStarted: print("Started list_output")
+        onFinished: print("Closed list_output")
 
         onErrorOccurred: console.log("Error Ocuured: ", error)
 
@@ -56,8 +56,8 @@ ColumnLayout {
         property string input_output_internal: ""
         property var input_split_internal: ""
 
-        onStarted: print("Started")
-        onFinished: print("Closed")
+        onStarted: print("Started list_inputs_internal")
+        onFinished: print("Closed list_inputs_internal")
 
         onErrorOccurred: console.log("Error Ocuured: ", error)
 
@@ -74,8 +74,8 @@ ColumnLayout {
         property string output_output_internal: ""
         property var output_split_internal: ""
 
-        onStarted: print("Started")
-        onFinished: print("Closed")
+        onStarted: print("Started list_outputs_internal")
+        onFinished: print("Closed list_outputs_internal")
 
         onErrorOccurred: console.log("Error Ocuured: ", error)
 
@@ -87,13 +87,30 @@ ColumnLayout {
     }
 
   Process {
-        id: pw_cli
+        id: pw_loopback
 
     //    property string input_output_internal: ""
     //    property var input_split_internal: ""
 
-        onStarted: print("Started")
-        onFinished: print("Closed")
+        onStarted: print("Started pw_cli")
+        onFinished: print("Closed pw_cli")
+
+        onErrorOccurred: console.log("Error Ocuured: ", error)
+
+        onReadyReadStandardOutput: {
+         //   input_output_internal = list_inputs_internal.readAll()
+     //       input_split_internal =input_output_internal.split("\n")
+           // input_txt.text = input_split[1]
+        }
+    }
+     Process {
+        id: pw_loopback_selected
+
+    //    property string input_output_internal: ""
+    //    property var input_split_internal: ""
+
+        onStarted: print("Started pw_cli2")
+        onFinished: print("Closed pw_cli2")
 
         onErrorOccurred: console.log("Error Ocuured: ", error)
 
@@ -108,20 +125,14 @@ ColumnLayout {
         Timer {
             interval: 500; running: true; repeat: false
             onTriggered:{
-              //  list_inputs.kill()
-            //    list_outputs.kill()
-            //    list_inputs_internal.kill()
-            //    list_outputs_internal.kill()
 
-                list_inputs.start("/home/eos_jlamphere/pw-monitor-tool/plugin/list_inputs.sh")
-                list_outputs.start("/home/eos_jlamphere/pw-monitor-tool/plugin/list_outputs.sh")
-                list_inputs_internal.start("/home/eos_jlamphere/pw-monitor-tool/plugin/list_inputs_internal.sh")
-                list_outputs_internal.start("/home/eos_jlamphere/pw-monitor-tool/plugin/list_outputs_internal.sh")
+                list_inputs.start("bash",["-c", "pw-cli ls Node | grep -B 3 'Audio/Source' | grep 'node.description' | cut -d \\\" -f2 "])
+                list_outputs.start("bash",["-c", "pw-cli ls Node | grep -B 3 'Audio/Sink' | grep 'node.description' | cut -d \\\" -f2 "])
 
-               // list_inputs.start(Qt.resolvedUrl("~/pw-monitor-tool/plugin/list_inputs.sh"))
-              //  list_outputs.start(Qt.resolvedUrl("~/pw-monitor-tool/plugin/list_outputs.sh"))
-             //   list_inputs_internal.start(Qt.resolvedUrl("~/pw-monitor-tool/plugin/list_inputs_internal.sh"))
-             //   list_outputs_internal.start(Qt.resolvedUrl("~/pw-monitor-tool/plugin/list_outputs_internal.sh"))
+                list_inputs_internal.start("bash",["-c", "pw-cli ls Node | grep -B 3 'Audio/Source' | grep 'node.name' | cut -d \\\" -f2 "])
+                list_outputs_internal.start("bash",["-c", "pw-cli ls Node | grep -B 3 'Audio/Sink' | grep 'node.name' | cut -d \\\" -f2 "])
+
+
             }
         }
     }
@@ -140,14 +151,14 @@ ColumnLayout {
 
         property string output: ""
 
-        onStarted: print("Started")
-        onFinished: print("Closed")
+        onStarted: print("Started destroy")
+        onFinished: print("Closed destroy")
 
         onErrorOccurred: console.log("Error Ocuured: ", error)
 
         onReadyReadStandardOutput: {
             output = destroy.readAll()
-       //     txt.text += output
+       //     txt.text += outputc
         }
     }
 
@@ -164,9 +175,17 @@ ColumnLayout {
         autoExclusive: true
               onClicked: {
 
-              destroy.start(Qt.resolvedUrl("~/pw-monitor-tool/plugin/destroy.sh"))
-              pw_cli.kill()
-              destroy.kill()
+
+
+              pw_loopback.kill()
+              pw_loopback_selected.kill()
+              destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
+              destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
+             // destroy.kill()
+           //   list_inputs_internal.kill()
+           //   list_inputs.kill()
+          //    list_outputs_internal.kill()
+         //     list_outputs.kill()
 
         }
 
@@ -179,7 +198,7 @@ ColumnLayout {
         autoExclusive: true
         onClicked: {
         //pw_loopback.start("/home/jkl/Documents/pipewire-scripts/monitor_line-in.sh")
-        pw_cli.start("pw-loopback")
+        pw_loopback.start("pw-loopback")
 
         }
     }
@@ -206,14 +225,12 @@ ColumnLayout {
        // argz = ["-l", "1", "-n", "sb-line-in", "-m", "[FL FR]", "--capture=alsa_input.pci-0000_0a_00.0.pro-input-0", "--playback=alsa_output.pci-0000_0a_00.0.pro-output-0"]
         //argz = ["-l", "1", "-n", "bingo", "-m", "'[FL FR ]'", "--capture='" +in_var[2]+"'", "--playback='"+out_var[3]+"'", "&" ]
         //pw_loopback.start("/home/jkl/Documents/pipewire-scripts/monitor_line-in.sh")
-        pw_cli.start("pw-loopback", argz)
+        pw_loopback_selected.start("pw-loopback", argz)
 
         }
     }
 
 
-
-//pw-loopback -l 1 -n 'sb-line-in' -m '[FL FR]' --capture='alsa_input.pci-0000_0a_00.0.pro-input-0'  --playback='alsa_output.pci-0000_0a_00.0.pro-output-0' &
 
 
 

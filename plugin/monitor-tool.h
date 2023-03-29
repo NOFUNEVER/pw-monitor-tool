@@ -21,7 +21,7 @@ public:
             args << temp.toString();
         }
 
-        QProcess::setProcessChannelMode( QProcess::ForwardedChannels );
+        QProcess::setProcessChannelMode( QProcess::MergedChannels );
         QProcess::start( program, args );
     }
 
