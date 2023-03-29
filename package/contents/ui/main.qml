@@ -10,9 +10,15 @@ import com.github.nofunever.pw_monitor_tool 1.0
 
 ColumnLayout {
 
+PlasmaComponents3.Label {
+Layout.alignment: Qt.AlignHCenter
+
+    text: i18n("PW-Loopback-UI")
+    height:30
+}
 
     width: 400
-    height: 980
+    height: 1980
 
 
     Process {
@@ -148,10 +154,13 @@ ColumnLayout {
     }
 
 
-  ButtonGroup {
-        id: group
-    }
+Column {
+        id: radioGroup
 
+        PlasmaComponents3.Label {
+    text: i18n("Defaults")
+    height:35
+}
     PlasmaComponents3.RadioButton {
         width: 200
 
@@ -183,6 +192,7 @@ ColumnLayout {
     }
 
         PlasmaComponents3.RadioButton {
+
         property var in_var:{}
         property var out_var:{}
         property var argz:{}
@@ -203,16 +213,22 @@ ColumnLayout {
 
         }
     }
-
+PlasmaComponents3.Label {
+    text: i18n("Favorites")
+    height:35
+}
+    }
 
 
 PlasmaComponents3.Label {
+
     text: i18n("Inputs")
-    height:30
+    height:20
 }
     PlasmaComponents3.ComboBox {
+        Layout.alignment: Qt.AlignHCenter
     width: 300
-    height:30
+    height:20
     id: inputComboBox
     model: list_inputs.input_split
     delegate: ItemDelegate {
@@ -221,12 +237,14 @@ PlasmaComponents3.Label {
         }
     }
     PlasmaComponents3.Label {
+Layout.alignment: Qt.AlignLeft
     text: i18n("Outputs")
-    height:30
+    height:20
 }
 PlasmaComponents3.ComboBox {
+    Layout.alignment: Qt.AlignHCenter
     width: 300
-    height:30
+    height:20
     id: outputComboBox
     model: list_outputs.output_split
     delegate: ItemDelegate {
@@ -235,14 +253,39 @@ PlasmaComponents3.ComboBox {
     }
     }
 
-PlasmaComponents3.Button {
-    icon.name: "view-refresh"
-    text: i18n("Enable/Add")
+
+
+
+
+    // button to add new radio button
+    PlasmaComponents3.Button {
+        property var in_var:{}
+        property var out_var:{}
+        property var in_var2:{}
+        property var out_var2:{}
+        property var in_index:{}
+        property var out_index:{}
+        id: newy
+        text: qsTr("Add Favorite")
         onClicked: {
-            var button = Qt.createQmlObject('import QtQuick.Controls 2.0; RadioButton { text: "New Favorite"}', group)
-            print("clicked")
-            group.addButton(button)
+            in_index = inputComboBox.currentIndex
+        out_index = outputComboBox.currentIndex
+        in_var = list_inputs.input_split[in_index]
+        out_var = list_outputs.output_split[out_index]
+        in_var2 = "--capture="+list_inputs_internal.input_split_internal[in_index]
+        out_var2 = "--playback="+list_outputs_internal.output_split_internal[out_index]
+            var radioBtn = Qt.createQmlObject('import QtQuick.Controls 2.0; RadioButton { property var in_index:{} ;        property var out_index:{};  property var in_var:{};    property var out_var:{}; property var in_var2:{}; property var out_var2:{}; onClicked: {       in_index = inputComboBox.currentIndex; out_index = outputComboBox.currentIndex;  in_var2 = "--capture="+list_inputs_internal.input_split_internal[in_index]; out_var2 = "--playback="+list_outputs_internal.output_split_internal[out_index];   pw_loopback_selected.start("pw-loopback", ["-l", "1", "-n", "loopback", "-m", "[FL FR]",in_var2 , out_var2 ]); } }', radioGroup);
+            radioBtn.text = in_var + " + " + out_var;
+            radioBtn.checked = true;
+
         }
+    }
+
+
+
+
+
+
 }
 
 
@@ -252,8 +295,6 @@ PlasmaComponents3.Button {
 
 
 
-
-}
 
 
 
