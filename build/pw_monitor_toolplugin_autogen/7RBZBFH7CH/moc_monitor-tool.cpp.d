@@ -1,5 +1,5 @@
-/home/eos_jlamphere/pw-monitor-tool/build/pw_monitor_toolplugin_autogen/7RBZBFH7CH/moc_monitor-tool.cpp: /home/eos_jlamphere/pw-monitor-tool/plugin/monitor-tool.h \
-  /home/eos_jlamphere/pw-monitor-tool/build/pw_monitor_toolplugin_autogen/moc_predefs.h \
+/home/eos_jlamphere/pw-monitor-tool-dev/build/pw_monitor_toolplugin_autogen/7RBZBFH7CH/moc_monitor-tool.cpp: /home/eos_jlamphere/pw-monitor-tool-dev/plugin/monitor-tool.h \
+  /home/eos_jlamphere/pw-monitor-tool-dev/build/pw_monitor_toolplugin_autogen/moc_predefs.h \
   /usr/include/assert.h \
   /usr/include/c++/11/algorithm \
   /usr/include/c++/11/array \

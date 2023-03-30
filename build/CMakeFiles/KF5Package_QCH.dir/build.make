@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/eos_jlamphere/pw-monitor-tool
+CMAKE_SOURCE_DIR = /home/eos_jlamphere/pw-monitor-tool-dev
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/eos_jlamphere/pw-monitor-tool/build
+CMAKE_BINARY_DIR = /home/eos_jlamphere/pw-monitor-tool-dev/build
 
 # Utility rule file for KF5Package_QCH.
 
@@ -78,6 +78,6 @@ CMakeFiles/KF5Package_QCH.dir/clean:
 .PHONY : CMakeFiles/KF5Package_QCH.dir/clean
 
 CMakeFiles/KF5Package_QCH.dir/depend:
-	cd /home/eos_jlamphere/pw-monitor-tool/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/eos_jlamphere/pw-monitor-tool /home/eos_jlamphere/pw-monitor-tool /home/eos_jlamphere/pw-monitor-tool/build /home/eos_jlamphere/pw-monitor-tool/build /home/eos_jlamphere/pw-monitor-tool/build/CMakeFiles/KF5Package_QCH.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/eos_jlamphere/pw-monitor-tool-dev/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/eos_jlamphere/pw-monitor-tool-dev /home/eos_jlamphere/pw-monitor-tool-dev /home/eos_jlamphere/pw-monitor-tool-dev/build /home/eos_jlamphere/pw-monitor-tool-dev/build /home/eos_jlamphere/pw-monitor-tool-dev/build/CMakeFiles/KF5Package_QCH.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/KF5Package_QCH.dir/depend
 

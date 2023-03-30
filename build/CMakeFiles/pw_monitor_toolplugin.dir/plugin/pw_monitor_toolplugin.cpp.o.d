@@ -1,7 +1,7 @@
 CMakeFiles/pw_monitor_toolplugin.dir/plugin/pw_monitor_toolplugin.cpp.o: \
- /home/eos_jlamphere/pw-monitor-tool/plugin/pw_monitor_toolplugin.cpp \
+ /home/eos_jlamphere/pw-monitor-tool-dev/plugin/pw_monitor_toolplugin.cpp \
  /usr/include/stdc-predef.h \
- /home/eos_jlamphere/pw-monitor-tool/plugin/pw_monitor_toolplugin.h \
+ /home/eos_jlamphere/pw-monitor-tool-dev/plugin/pw_monitor_toolplugin.h \
  /usr/include/x86_64-linux-gnu/qt5/QtQml/QQmlEngine \
  /usr/include/x86_64-linux-gnu/qt5/QtQml/qqmlengine.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qurl.h \
@@ -274,7 +274,7 @@ CMakeFiles/pw_monitor_toolplugin.dir/plugin/pw_monitor_toolplugin.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QUrl \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qurl.h \
  /usr/include/x86_64-linux-gnu/qt5/QtQml/qqmlextensioninterface.h \
- /home/eos_jlamphere/pw-monitor-tool/plugin/monitor-tool.h \
+ /home/eos_jlamphere/pw-monitor-tool-dev/plugin/monitor-tool.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QProcess \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qprocess.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant \

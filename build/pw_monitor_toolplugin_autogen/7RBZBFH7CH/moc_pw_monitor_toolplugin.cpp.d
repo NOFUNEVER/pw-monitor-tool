@@ -1,5 +1,5 @@
-/home/eos_jlamphere/pw-monitor-tool/build/pw_monitor_toolplugin_autogen/7RBZBFH7CH/moc_pw_monitor_toolplugin.cpp: /home/eos_jlamphere/pw-monitor-tool/plugin/pw_monitor_toolplugin.h \
-  /home/eos_jlamphere/pw-monitor-tool/build/pw_monitor_toolplugin_autogen/moc_predefs.h \
+/home/eos_jlamphere/pw-monitor-tool-dev/build/pw_monitor_toolplugin_autogen/7RBZBFH7CH/moc_pw_monitor_toolplugin.cpp: /home/eos_jlamphere/pw-monitor-tool-dev/plugin/pw_monitor_toolplugin.h \
+  /home/eos_jlamphere/pw-monitor-tool-dev/build/pw_monitor_toolplugin_autogen/moc_predefs.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
   /usr/include/assert.h \

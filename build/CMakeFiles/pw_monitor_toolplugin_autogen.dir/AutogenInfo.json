@@ -1,16 +1,16 @@
 {
-	"BUILD_DIR" : "/home/eos_jlamphere/pw-monitor-tool/build/pw_monitor_toolplugin_autogen",
-	"CMAKE_BINARY_DIR" : "/home/eos_jlamphere/pw-monitor-tool/build",
-	"CMAKE_CURRENT_BINARY_DIR" : "/home/eos_jlamphere/pw-monitor-tool/build",
-	"CMAKE_CURRENT_SOURCE_DIR" : "/home/eos_jlamphere/pw-monitor-tool",
+	"BUILD_DIR" : "/home/eos_jlamphere/pw-monitor-tool-dev/build/pw_monitor_toolplugin_autogen",
+	"CMAKE_BINARY_DIR" : "/home/eos_jlamphere/pw-monitor-tool-dev/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/eos_jlamphere/pw-monitor-tool-dev/build",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/eos_jlamphere/pw-monitor-tool-dev",
 	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
 	"CMAKE_LIST_FILES" : 
 	[
-		"/home/eos_jlamphere/pw-monitor-tool/CMakeLists.txt",
-		"/home/eos_jlamphere/pw-monitor-tool/build/CMakeFiles/3.22.1/CMakeSystem.cmake",
+		"/home/eos_jlamphere/pw-monitor-tool-dev/CMakeLists.txt",
+		"/home/eos_jlamphere/pw-monitor-tool-dev/build/CMakeFiles/3.22.1/CMakeSystem.cmake",
 		"/usr/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake",
-		"/home/eos_jlamphere/pw-monitor-tool/build/CMakeFiles/3.22.1/CMakeCCompiler.cmake",
-		"/home/eos_jlamphere/pw-monitor-tool/build/CMakeFiles/3.22.1/CMakeCXXCompiler.cmake",
+		"/home/eos_jlamphere/pw-monitor-tool-dev/build/CMakeFiles/3.22.1/CMakeCCompiler.cmake",
+		"/home/eos_jlamphere/pw-monitor-tool-dev/build/CMakeFiles/3.22.1/CMakeCXXCompiler.cmake",
 		"/usr/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake",
 		"/usr/share/cmake-3.22/Modules/CMakeGenericSystem.cmake",
 		"/usr/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake",
@@ -213,27 +213,27 @@
 		"/usr/lib/x86_64-linux-gnu/cmake/KF5WindowSystem/KF5WindowSystemQchTargets.cmake",
 		"/usr/lib/x86_64-linux-gnu/cmake/KF5Plasma/KF5PlasmaMacros.cmake"
 	],
-	"CMAKE_SOURCE_DIR" : "/home/eos_jlamphere/pw-monitor-tool",
+	"CMAKE_SOURCE_DIR" : "/home/eos_jlamphere/pw-monitor-tool-dev",
 	"DEP_FILE" : "",
 	"DEP_FILE_RULE_NAME" : "",
 	"HEADERS" : 
 	[
 		[
-			"/home/eos_jlamphere/pw-monitor-tool/plugin/monitor-tool.h",
+			"/home/eos_jlamphere/pw-monitor-tool-dev/plugin/monitor-tool.h",
 			"Mu",
 			"7RBZBFH7CH/moc_monitor-tool.cpp",
 			null
 		],
 		[
-			"/home/eos_jlamphere/pw-monitor-tool/plugin/pw_monitor_toolplugin.h",
+			"/home/eos_jlamphere/pw-monitor-tool-dev/plugin/pw_monitor_toolplugin.h",
 			"Mu",
 			"7RBZBFH7CH/moc_pw_monitor_toolplugin.cpp",
 			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "/home/eos_jlamphere/pw-monitor-tool/build/pw_monitor_toolplugin_autogen/include",
-	"MOC_COMPILATION_FILE" : "/home/eos_jlamphere/pw-monitor-tool/build/pw_monitor_toolplugin_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "/home/eos_jlamphere/pw-monitor-tool-dev/build/pw_monitor_toolplugin_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/eos_jlamphere/pw-monitor-tool-dev/build/pw_monitor_toolplugin_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : 
 	[
 		"QT_CORE_LIB",
@@ -297,8 +297,8 @@
 	],
 	"MOC_INCLUDES" : 
 	[
-		"/home/eos_jlamphere/pw-monitor-tool/build",
-		"/home/eos_jlamphere/pw-monitor-tool",
+		"/home/eos_jlamphere/pw-monitor-tool-dev/build",
+		"/home/eos_jlamphere/pw-monitor-tool-dev",
 		"/usr/include/x86_64-linux-gnu/qt5",
 		"/usr/include/x86_64-linux-gnu/qt5/QtCore",
 		"/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++",
@@ -347,26 +347,26 @@
 		"-c",
 		"/usr/share/cmake-3.22/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "/home/eos_jlamphere/pw-monitor-tool/build/pw_monitor_toolplugin_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "/home/eos_jlamphere/pw-monitor-tool-dev/build/pw_monitor_toolplugin_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : [],
 	"MULTI_CONFIG" : false,
 	"PARALLEL" : 8,
-	"PARSE_CACHE_FILE" : "/home/eos_jlamphere/pw-monitor-tool/build/CMakeFiles/pw_monitor_toolplugin_autogen.dir/ParseCache.txt",
+	"PARSE_CACHE_FILE" : "/home/eos_jlamphere/pw-monitor-tool-dev/build/CMakeFiles/pw_monitor_toolplugin_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "/usr/lib/qt5/bin/moc",
 	"QT_UIC_EXECUTABLE" : "",
 	"QT_VERSION_MAJOR" : 5,
 	"QT_VERSION_MINOR" : 15,
-	"SETTINGS_FILE" : "/home/eos_jlamphere/pw-monitor-tool/build/CMakeFiles/pw_monitor_toolplugin_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "/home/eos_jlamphere/pw-monitor-tool-dev/build/CMakeFiles/pw_monitor_toolplugin_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
 		[
-			"/home/eos_jlamphere/pw-monitor-tool/plugin/monitor-tool.cpp",
+			"/home/eos_jlamphere/pw-monitor-tool-dev/plugin/monitor-tool.cpp",
 			"Mu",
 			null
 		],
 		[
-			"/home/eos_jlamphere/pw-monitor-tool/plugin/pw_monitor_toolplugin.cpp",
+			"/home/eos_jlamphere/pw-monitor-tool-dev/plugin/pw_monitor_toolplugin.cpp",
 			"Mu",
 			null
 		]

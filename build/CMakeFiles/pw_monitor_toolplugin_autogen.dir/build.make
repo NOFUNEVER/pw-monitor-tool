@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/eos_jlamphere/pw-monitor-tool
+CMAKE_SOURCE_DIR = /home/eos_jlamphere/pw-monitor-tool-dev
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/eos_jlamphere/pw-monitor-tool/build
+CMAKE_BINARY_DIR = /home/eos_jlamphere/pw-monitor-tool-dev/build
 
 # Utility rule file for pw_monitor_toolplugin_autogen.
 
@@ -67,8 +67,8 @@ include CMakeFiles/pw_monitor_toolplugin_autogen.dir/compiler_depend.make
 include CMakeFiles/pw_monitor_toolplugin_autogen.dir/progress.make
 
 CMakeFiles/pw_monitor_toolplugin_autogen:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/eos_jlamphere/pw-monitor-tool/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC for target pw_monitor_toolplugin"
-	/usr/bin/cmake -E cmake_autogen /home/eos_jlamphere/pw-monitor-tool/build/CMakeFiles/pw_monitor_toolplugin_autogen.dir/AutogenInfo.json Debug
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/eos_jlamphere/pw-monitor-tool-dev/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC for target pw_monitor_toolplugin"
+	/usr/bin/cmake -E cmake_autogen /home/eos_jlamphere/pw-monitor-tool-dev/build/CMakeFiles/pw_monitor_toolplugin_autogen.dir/AutogenInfo.json Debug
 
 pw_monitor_toolplugin_autogen: CMakeFiles/pw_monitor_toolplugin_autogen
 pw_monitor_toolplugin_autogen: CMakeFiles/pw_monitor_toolplugin_autogen.dir/build.make
@@ -83,6 +83,6 @@ CMakeFiles/pw_monitor_toolplugin_autogen.dir/clean:
 .PHONY : CMakeFiles/pw_monitor_toolplugin_autogen.dir/clean
 
 CMakeFiles/pw_monitor_toolplugin_autogen.dir/depend:
-	cd /home/eos_jlamphere/pw-monitor-tool/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/eos_jlamphere/pw-monitor-tool /home/eos_jlamphere/pw-monitor-tool /home/eos_jlamphere/pw-monitor-tool/build /home/eos_jlamphere/pw-monitor-tool/build /home/eos_jlamphere/pw-monitor-tool/build/CMakeFiles/pw_monitor_toolplugin_autogen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/eos_jlamphere/pw-monitor-tool-dev/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/eos_jlamphere/pw-monitor-tool-dev /home/eos_jlamphere/pw-monitor-tool-dev /home/eos_jlamphere/pw-monitor-tool-dev/build /home/eos_jlamphere/pw-monitor-tool-dev/build /home/eos_jlamphere/pw-monitor-tool-dev/build/CMakeFiles/pw_monitor_toolplugin_autogen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/pw_monitor_toolplugin_autogen.dir/depend
 
