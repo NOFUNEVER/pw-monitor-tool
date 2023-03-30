@@ -1,6 +1,6 @@
 
 list(APPEND QML_DIRS "/usr/lib/x86_64-linux-gnu/qt5/qml")
-
+list(APPEND QML_DIRS "/usr/lib/x86_64-linux-gnu/qt5/qml/org/kde")
 
 cmake_minimum_required(VERSION 3.16)
 
@@ -17,11 +17,14 @@ find_package(Qt5 REQUIRED COMPONENTS
     Core
     Qml
 
-)
 
+)
+find_package(KF5CoreAddons)
 find_package(KF5 REQUIRED COMPONENTS
     Plasma # Required for cmake plasma_install_package()
     # I18n
+    CoreAddons
+    Config
 )
 
 plasma_install_package(package com.github.nofunever.pw_monitor_tool)
@@ -40,6 +43,8 @@ add_library(pw_monitor_toolplugin SHARED ${pw_monitor_toolplugin_SRCS})
 target_link_libraries(pw_monitor_toolplugin
     Qt::Core
     Qt::Qml
+    KF5::CoreAddons
+    KF5::ConfigCore
     # KF5::Plasma
     # KF5::I18n
 )
