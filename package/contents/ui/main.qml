@@ -213,9 +213,6 @@ ColumnLayout {
                                                         out_index = outputComboBox.currentIndex
                                                         in_var = "--capture="+list_inputs_internal.input_split_internal[in_index]
                                                         out_var = "--playback="+list_outputs_internal.output_split_internal[out_index]
-                                                        print("WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWOOOOOOOOOO")
-                                                        print(in_var)
-                                                        print(out_var)
                                                         argz = ["-l", "1", "-n", "loopback", "-m", "[FL FR]", in_var, out_var ]
                                                         pw_loopback_selected.start("pw-loopback", argz)
 
@@ -258,7 +255,7 @@ ColumnLayout {
 
                                                 onModelChanged: {
 
-                                                    // Layout.minimumWidth = 40//_maxWidth + implicitIndicatorWidth + leftPadding + rightPadding
+                                            
                                                 }
 
                                                 Layout.alignment: Qt.AlignHCenter
@@ -276,10 +273,10 @@ ColumnLayout {
 
                                             Component.onCompleted: {
                                                 destroy.kill()
-                                                   destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ', ' | cut -c 5- )"])
-                                                        destroy.kill()
-                                                        destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ', ' | cut -c 5- )"])
-                                                        destroy.kill()
+                                                destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ', ' | cut -c 5- )"])
+                                                destroy.kill()
+                                                destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ', ' | cut -c 5- )"])
+                                                destroy.kill()
                                                 favoritesDB = LocalStorage.openDatabaseSync("MyApp", "1.0", "Storage", 1000000);
 
                                                 favoritesDB.transaction(function(tx) {
@@ -287,7 +284,7 @@ ColumnLayout {
                                             });
 
                                             favoritesDB.readTransaction(function(tx) {
-                                                
+
                                             var rs = tx.executeSql("SELECT * FROM favorites");
                                             for (var i = 0; i < rs.rows.length; i++) {
                                                 var favorite = rs.rows.item(i);
@@ -295,8 +292,8 @@ ColumnLayout {
                                                 print("wigggle wiggle wiggle")
                                                 print(favorite.in_var)
                                                 print(favorite.out_var)
-                                                big_string = 'import QtQuick.Controls 2.0; RadioButton { property var in_index: {} ; property var out_index: {}; property var in_var: {}; property var out_var: {}; property var in_var2: {}; property var out_var2: {}; onClicked: { in_index = inputComboBox.currentIndex; out_index = outputComboBox.currentIndex;  pw_loopback_selected.start("pw-loopback", ["-l", "1", "-n", "loopback", "-m", "[FL FR]","' + favorite.in_var+'","' +favorite.out_var+'" ]); } }'
-                                               print(big_string)
+                                                big_string = 'import QtQuick.Controls 2.0; RadioButton {  property var in_var: {}; property var out_var: {}; onClicked: {  pw_loopback_selected.start("pw-loopback", ["-l", "1", "-n", "loopback", "-m", "[FL FR]", "' + favorite.in_var+'", "' +favorite.out_var+'" ]); } }'
+                                                print(big_string)
                                                 var radioBtn = Qt.createQmlObject(big_string, radioGroup);
                                                 radioBtn.text = favorite.name;
                                                 radioBtn.in_var = favorite.in_var;
@@ -310,58 +307,58 @@ ColumnLayout {
                                     PlasmaComponents3.Button {
                                         Layout.alignment: Qt.AlignRight
                                         property string in_var:""
-                                        property string out_var:""
-                                        property var in_var2: { }
-                                        property var out_var2: { }
-                                        property var in_index: { }
-                                        property var out_index: { }
-                                        property string big_string:""
-                                        id: newy
-                                        text: qsTr("Add Favorite")
-                                        onClicked: {
-                                            in_index = inputComboBox.currentIndex
-                                            out_index = outputComboBox.currentIndex
-                                            in_var2 = list_inputs.input_split[in_index]
-                                            out_var2 = list_outputs.output_split[out_index]
-                                            in_var = "--capture="+list_inputs_internal.input_split_internal[in_index]
-                                            out_var = "--playback="+list_outputs_internal.output_split_internal[out_index]
-                                            print(in_var)
-                                            print(out_var)
-                                            big_string = 'import QtQuick.Controls 2.0; RadioButton { property var in_index: {} ; property var out_index: {}; property var in_var: {}; property var out_var: {}; property var in_var2: {}; property var out_var2: {}; onClicked: { in_index = inputComboBox.currentIndex; out_index = outputComboBox.currentIndex;  pw_loopback_selected.start("pw-loopback", ["-l", "1", "-n", "loopback", "-m", "[FL FR]","' + in_var+'","' +out_var+'" ]); } }'
-                                            print(big_string)
-                                            var radioBtn = Qt.createQmlObject(big_string, radioGroup);
-                                            radioBtn.text = in_var2 + " + " + out_var2;
-                                            radioBtn.checked = true;
-                                            radioBtn.in_var = in_var;
-                                            radioBtn.out_var = out_var;
+                                            property string out_var:""
+                                                property var in_var2: { }
+                                                property var out_var2: { }
+                                                property var in_index: { }
+                                                property var out_index: { }
+                                                property string big_string:""
+                                                    id: newy
+                                                    text: qsTr("Add Favorite")
+                                                    onClicked: {
+                                                        in_index = inputComboBox.currentIndex
+                                                        out_index = outputComboBox.currentIndex
+                                                        in_var2 = list_inputs.input_split[in_index]
+                                                        out_var2 = list_outputs.output_split[out_index]
+                                                        in_var = "--capture="+list_inputs_internal.input_split_internal[in_index]
+                                                        out_var = "--playback="+list_outputs_internal.output_split_internal[out_index]
+                                                        print(in_var)
+                                                        print(out_var)
+                                                        big_string = 'import QtQuick.Controls 2.0; RadioButton { property var in_index: {} ; property var out_index: {}; property var in_var: {}; property var out_var: {};  onClicked: { in_index = inputComboBox.currentIndex; out_index = outputComboBox.currentIndex; pw_loopback_selected.start("pw-loopback", ["-l", "1", "-n", "loopback", "-m", "[FL FR]", "' + in_var+'", "' +out_var+'" ]); } }'
+                                                        print(big_string)
+                                                        var radioBtn = Qt.createQmlObject(big_string, radioGroup);
+                                                        radioBtn.text = in_var2 + " + " + out_var2;
+                                                        radioBtn.checked = true;
+                                                        radioBtn.in_var = in_var;
+                                                        radioBtn.out_var = out_var;
 
-                                            favoritesDB.transaction(function(tx) {
-                                            tx.executeSql("INSERT INTO favorites VALUES(?, ?, ?)", [radioBtn.text, in_var, out_var]);
-                                        });
+                                                        favoritesDB.transaction(function(tx) {
+                                                        tx.executeSql("INSERT INTO favorites VALUES(?, ?, ?)", [radioBtn.text, in_var, out_var]);
+                                                    });
 
-                                    }
-                                }
+                                                }
+                                            }
 
-                                PlasmaComponents3.Button {
-                                    text: i18n("Clear Favorites")
-                                    onClicked: {
-                                        // Clear the favorites from the database
-                                        favoritesDB.transaction(function(tx) {
-                                        tx.executeSql("DELETE FROM favorites");
-                                    });
+                                            PlasmaComponents3.Button {
+                                                text: i18n("Clear Favorites")
+                                                onClicked: {
+                                                    // Clear the favorites from the database
+                                                    favoritesDB.transaction(function(tx) {
+                                                    tx.executeSql("DELETE FROM favorites");
+                                                });
 
-                                    // Remove the radio buttons from the UI
-                                    for (var i = 0; i < radioGroup.children.length; i++) {
-                                        var child = radioGroup.children[i];
-                                        if (child instanceof RadioButton)
-                                        {
-                                            child.destroy();
+                                                // Remove the radio buttons from the UI
+                                                for (var i = 0; i < radioGroup.children.length; i++) {
+                                                    var child = radioGroup.children[i];
+                                                    if (child instanceof RadioButton)
+                                                    {
+                                                        child.destroy();
+                                                    }
+                                                }
+                                            }
                                         }
-                                    }
-                                }
-                            }
 
-                        }
+                                    }
 
 
 
