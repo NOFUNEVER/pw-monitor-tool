@@ -1,3 +1,4 @@
+
 import QtQuick.Layouts 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
@@ -7,6 +8,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import com.github.nofunever.pw_monitor_tool 1.0
 import QtQuick.LocalStorage 2.0
+import org.kde.kcoreaddons 1.0 as Kcoreaddons
 
 ColumnLayout {
     id:appz
@@ -22,7 +24,6 @@ ColumnLayout {
     height: 1980
 
     property var favoritesDB: null
-
 
 
         Process {
@@ -178,7 +179,9 @@ ColumnLayout {
                                                         pw_loopback.kill()
                                                         pw_loopback_selected.kill()
                                                         destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ', ' | cut -c 5- )"])
+                                                        destroy.kill()
                                                         destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ', ' | cut -c 5- )"])
+                                                        destroy.kill()
                                                     }
 
                                                 }
@@ -272,7 +275,11 @@ ColumnLayout {
 
 
                                             Component.onCompleted: {
-                                                
+                                                destroy.kill()
+                                                   destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ', ' | cut -c 5- )"])
+                                                        destroy.kill()
+                                                        destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ', ' | cut -c 5- )"])
+                                                        destroy.kill()
                                                 favoritesDB = LocalStorage.openDatabaseSync("MyApp", "1.0", "Storage", 1000000);
 
                                                 favoritesDB.transaction(function(tx) {
