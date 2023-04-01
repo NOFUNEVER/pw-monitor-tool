@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/eos_jlamphere/pw-monitor-tool/kplugin/kproc.cpp" "CMakeFiles/kproc_plugin.dir/kplugin/kproc.cpp.o" "gcc" "CMakeFiles/kproc_plugin.dir/kplugin/kproc.cpp.o.d"
-  "/home/eos_jlamphere/pw-monitor-tool/kplugin/kproc_plugin.cpp" "CMakeFiles/kproc_plugin.dir/kplugin/kproc_plugin.cpp.o" "gcc" "CMakeFiles/kproc_plugin.dir/kplugin/kproc_plugin.cpp.o.d"
-  "/home/eos_jlamphere/pw-monitor-tool/build/kproc_plugin_autogen/mocs_compilation.cpp" "CMakeFiles/kproc_plugin.dir/kproc_plugin_autogen/mocs_compilation.cpp.o" "gcc" "CMakeFiles/kproc_plugin.dir/kproc_plugin_autogen/mocs_compilation.cpp.o.d"
+  "/home/jkl/pw-monitor-tool/kplugin/kproc.cpp" "CMakeFiles/kproc_plugin.dir/kplugin/kproc.cpp.o" "gcc" "CMakeFiles/kproc_plugin.dir/kplugin/kproc.cpp.o.d"
+  "/home/jkl/pw-monitor-tool/kplugin/kproc_plugin.cpp" "CMakeFiles/kproc_plugin.dir/kplugin/kproc_plugin.cpp.o" "gcc" "CMakeFiles/kproc_plugin.dir/kplugin/kproc_plugin.cpp.o.d"
+  "/home/jkl/pw-monitor-tool/build/kproc_plugin_autogen/mocs_compilation.cpp" "CMakeFiles/kproc_plugin.dir/kproc_plugin_autogen/mocs_compilation.cpp.o" "gcc" "CMakeFiles/kproc_plugin.dir/kproc_plugin_autogen/mocs_compilation.cpp.o.d"
   )
 
 # Targets to which this target links.

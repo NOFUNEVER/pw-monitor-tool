@@ -6,6 +6,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+
 import com.github.nofunever.pw_monitor_tool 1.0
 import QtQuick.LocalStorage 2.0
 import org.kde.kcoreaddons 1.0 as Kcoreaddons
@@ -26,7 +27,7 @@ ColumnLayout {
     property var favoritesDB: null
 
 
-        Process {
+        Kprocess {
             id: list_inputs
 
             property string input_output: ""
@@ -34,9 +35,7 @@ ColumnLayout {
 
                     onStarted: print("Started list_inputs")
                     onFinished: print("Closed list_inputs")
-
                     onErrorOccurred: console.log("Error Ocuured: ", error)
-
                     onReadyReadStandardOutput: {
                         input_output = list_inputs.readAll()
                         input_split =input_output.split("\n")
@@ -44,7 +43,7 @@ ColumnLayout {
                     }
                 }
 
-                Process {
+                Kprocess {
                     id: list_outputs
 
                     property string output_output: ""
@@ -52,16 +51,14 @@ ColumnLayout {
 
                             onStarted: print("Started list_output")
                             onFinished: print("Closed list_output")
-
                             onErrorOccurred: console.log("Error Ocuured: ", error)
-
                             onReadyReadStandardOutput: {
                                 output_output = list_outputs.readAll()
                                 output_split =output_output.split("\n")
 
                             }
                         }
-                        Process {
+                        Kprocess {
                             id: list_inputs_internal
 
                             property string input_output_internal: ""
@@ -79,7 +76,7 @@ ColumnLayout {
                                     }
                                 }
 
-                                Process {
+                                Kprocess {
                                     id: list_outputs_internal
 
                                     property string output_output_internal: ""
@@ -87,9 +84,7 @@ ColumnLayout {
 
                                             onStarted: print("Started list_outputs_internal")
                                             onFinished: print("Closed list_outputs_internal")
-
                                             onErrorOccurred: console.log("Error Ocuured: ", error)
-
                                             onReadyReadStandardOutput: {
                                                 output_output_internal = list_outputs_internal.readAll()
                                                 output_split_internal =output_output_internal.split("\n")
@@ -97,31 +92,21 @@ ColumnLayout {
                                             }
                                         }
 
-                                        Process {
+                                        Kprocess {
                                             id: pw_loopback
-
-
-
                                             onStarted: print("Started pw_loopback")
                                             onFinished: print("Closed pw_loopback")
-
                                             onErrorOccurred: console.log("Error Ocuured: ", error)
-
                                             onReadyReadStandardOutput: {
-
                                             }
                                         }
-                                        Process {
+                                        Kprocess {
                                             id: pw_loopback_selected
-
 
                                             onStarted: print("Started pw_loopback_selected")
                                             onFinished: print("Closed pw_loopback_selected")
-
                                             onErrorOccurred: console.log("Error Ocuured: ", error)
-
                                             onReadyReadStandardOutput: {
-
                                             }
                                         }
 
@@ -142,7 +127,7 @@ ColumnLayout {
                                         }
 
 
-                                        Process {
+                                        Kprocess {
                                             id: destroy
 
                                             property string output: ""
@@ -255,7 +240,7 @@ ColumnLayout {
 
                                                 onModelChanged: {
 
-                                            
+
                                                 }
 
                                                 Layout.alignment: Qt.AlignHCenter
@@ -292,7 +277,7 @@ ColumnLayout {
                                                 print("wigggle wiggle wiggle")
                                                 print(favorite.in_var)
                                                 print(favorite.out_var)
-                                                big_string = 'import QtQuick.Controls 2.0; RadioButton {  property var in_var: {}; property var out_var: {}; onClicked: {  pw_loopback_selected.start("pw-loopback", ["-l", "1", "-n", "loopback", "-m", "[FL FR]", "' + favorite.in_var+'", "' +favorite.out_var+'" ]); } }'
+                                                big_string = 'import QtQuick.Controls 2.0; RadioButton { property var in_var: {}; property var out_var: {}; onClicked: { pw_loopback_selected.start("pw-loopback", ["-l", "1", "-n", "loopback", "-m", "[FL FR]", "' + favorite.in_var+'", "' +favorite.out_var+'" ]); } }'
                                                 print(big_string)
                                                 var radioBtn = Qt.createQmlObject(big_string, radioGroup);
                                                 radioBtn.text = favorite.name;
@@ -324,7 +309,7 @@ ColumnLayout {
                                                         out_var = "--playback="+list_outputs_internal.output_split_internal[out_index]
                                                         print(in_var)
                                                         print(out_var)
-                                                        big_string = 'import QtQuick.Controls 2.0; RadioButton { property var in_index: {} ; property var out_index: {}; property var in_var: {}; property var out_var: {};  onClicked: { in_index = inputComboBox.currentIndex; out_index = outputComboBox.currentIndex; pw_loopback_selected.start("pw-loopback", ["-l", "1", "-n", "loopback", "-m", "[FL FR]", "' + in_var+'", "' +out_var+'" ]); } }'
+                                                        big_string = 'import QtQuick.Controls 2.0; RadioButton { property var in_index: {} ; property var out_index: {}; property var in_var: {}; property var out_var: {}; onClicked: { in_index = inputComboBox.currentIndex; out_index = outputComboBox.currentIndex; pw_loopback_selected.start("pw-loopback", ["-l", "1", "-n", "loopback", "-m", "[FL FR]", "' + in_var+'", "' +out_var+'" ]); } }'
                                                         print(big_string)
                                                         var radioBtn = Qt.createQmlObject(big_string, radioGroup);
                                                         radioBtn.text = in_var2 + " + " + out_var2;

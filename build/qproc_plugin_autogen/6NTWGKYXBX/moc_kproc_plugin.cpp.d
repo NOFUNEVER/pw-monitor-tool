@@ -1,4 +1,4 @@
-/home/jkl/pw-monitor-tool/build/qproc_plugin_autogen/6NTWGKYXBX/moc_qproc_plugin.cpp: /home/jkl/pw-monitor-tool/qplugin/qproc_plugin.h \
+/home/jkl/pw-monitor-tool/build/qproc_plugin_autogen/6NTWGKYXBX/moc_kproc_plugin.cpp: /home/jkl/pw-monitor-tool/qplugin/kproc_plugin.h \
   /home/jkl/pw-monitor-tool/build/qproc_plugin_autogen/moc_predefs.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
