@@ -6,7 +6,6 @@ import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-
 import com.github.nofunever.pw_monitor_tool 1.0
 import QtQuick.LocalStorage 2.0
 import org.kde.kcoreaddons 1.0 as Kcoreaddons
@@ -26,7 +25,6 @@ ColumnLayout {
 
     property var favoritesDB: null
 
-
         Kprocess {
             id: list_inputs
 
@@ -35,7 +33,7 @@ ColumnLayout {
 
                     onStarted: print("Started list_inputs")
                     onFinished: print("Closed list_inputs")
-                    onErrorOccurred: console.log("Error Ocuured: ", error)
+                    onErrorOccurred: console.log("List Inputs Error Ocuured: ", error)
                     onReadyReadStandardOutput: {
                         input_output = list_inputs.readAll()
                         input_split =input_output.split("\n")
@@ -51,7 +49,7 @@ ColumnLayout {
 
                             onStarted: print("Started list_output")
                             onFinished: print("Closed list_output")
-                            onErrorOccurred: console.log("Error Ocuured: ", error)
+                            onErrorOccurred: console.log("List Outputs Error Ocuured: ", error)
                             onReadyReadStandardOutput: {
                                 output_output = list_outputs.readAll()
                                 output_split =output_output.split("\n")
@@ -67,7 +65,7 @@ ColumnLayout {
                                     onStarted: print("Started list_inputs_internal")
                                     onFinished: print("Closed list_inputs_internal")
 
-                                    onErrorOccurred: console.log("Error Ocuured: ", error)
+                                    onErrorOccurred: console.log("List input internal Error Ocuured: ", error)
 
                                     onReadyReadStandardOutput: {
                                         input_output_internal = list_inputs_internal.readAll()
@@ -84,7 +82,7 @@ ColumnLayout {
 
                                             onStarted: print("Started list_outputs_internal")
                                             onFinished: print("Closed list_outputs_internal")
-                                            onErrorOccurred: console.log("Error Ocuured: ", error)
+                                            onErrorOccurred: console.log("output internal Error Ocuured: ", error)
                                             onReadyReadStandardOutput: {
                                                 output_output_internal = list_outputs_internal.readAll()
                                                 output_split_internal =output_output_internal.split("\n")
@@ -96,20 +94,11 @@ ColumnLayout {
                                             id: pw_loopback
                                             onStarted: print("Started pw_loopback")
                                             onFinished: print("Closed pw_loopback")
-                                            onErrorOccurred: console.log("Error Ocuured: ", error)
+                                            onErrorOccurred: console.log("pw-loopback Error Ocuured: ", error)
                                             onReadyReadStandardOutput: {
                                             }
                                         }
-                                        Kprocess {
-                                            id: pw_loopback_selected
-
-                                            onStarted: print("Started pw_loopback_selected")
-                                            onFinished: print("Closed pw_loopback_selected")
-                                            onErrorOccurred: console.log("Error Ocuured: ", error)
-                                            onReadyReadStandardOutput: {
-                                            }
-                                        }
-
+                    
                                         Item {
                                             Timer {
                                                 interval: 500; running: true; repeat: false
@@ -135,7 +124,7 @@ ColumnLayout {
                                                 onStarted: print("Started destroy")
                                                 onFinished: print("Closed destroy")
 
-                                                onErrorOccurred: console.log("Error Ocuured: ", error)
+                                                onErrorOccurred: console.log("destroy Error Ocuured: ", error)
 
                                                 onReadyReadStandardOutput: {
                                                     output = destroy.readAll()
@@ -161,12 +150,11 @@ ColumnLayout {
 
 
 
-                                                        pw_loopback.kill()
-                                                        pw_loopback_selected.kill()
-                                                        destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ', ' | cut -c 5- )"])
-                                                        destroy.kill()
-                                                        destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ', ' | cut -c 5- )"])
-                                                        destroy.kill()
+                                                       
+                                                        destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
+                                                        destroy.write("exit")
+                                                     
+                                                       
                                                     }
 
                                                 }
@@ -178,7 +166,7 @@ ColumnLayout {
                                                     autoExclusive: true
                                                     onClicked: {
 
-                                                        pw_loopback.start("pw-loopback")
+                                                        pw_loopback.startDetached("pw-loopback")
 
                                                     }
                                                 }
@@ -199,7 +187,7 @@ ColumnLayout {
                                                         in_var = "--capture="+list_inputs_internal.input_split_internal[in_index]
                                                         out_var = "--playback="+list_outputs_internal.output_split_internal[out_index]
                                                         argz = ["-l", "1", "-n", "loopback", "-m", "[FL FR]", in_var, out_var ]
-                                                        pw_loopback_selected.start("pw-loopback", argz)
+                                                        pw_loopback_selected.startDetached("pw-loopback", argz)
 
                                                     }
                                                 }
@@ -257,11 +245,11 @@ ColumnLayout {
 
 
                                             Component.onCompleted: {
-                                                destroy.kill()
+                                               
                                                 destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ', ' | cut -c 5- )"])
-                                                destroy.kill()
-                                                destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ', ' | cut -c 5- )"])
-                                                destroy.kill()
+                                                destroy.write("exit")
+                                               
+                                              
                                                 favoritesDB = LocalStorage.openDatabaseSync("MyApp", "1.0", "Storage", 1000000);
 
                                                 favoritesDB.transaction(function(tx) {
@@ -274,11 +262,9 @@ ColumnLayout {
                                             for (var i = 0; i < rs.rows.length; i++) {
                                                 var favorite = rs.rows.item(i);
                                                 var big_string = "";
-                                                print("wigggle wiggle wiggle")
-                                                print(favorite.in_var)
-                                                print(favorite.out_var)
-                                                big_string = 'import QtQuick.Controls 2.0; RadioButton { property var in_var: {}; property var out_var: {}; onClicked: { pw_loopback_selected.start("pw-loopback", ["-l", "1", "-n", "loopback", "-m", "[FL FR]", "' + favorite.in_var+'", "' +favorite.out_var+'" ]); } }'
-                                                print(big_string)
+                                                
+                                                big_string = 'import QtQuick.Controls 2.0; RadioButton { property var in_var: {}; property var out_var: {}; onClicked: { pw_loopback.startDetached("pw-loopback", ["-l", "1", "-n", "loopback", "-m", "[FL FR]", "' + favorite.in_var+'", "' +favorite.out_var+'" ]); } }'
+                                          
                                                 var radioBtn = Qt.createQmlObject(big_string, radioGroup);
                                                 radioBtn.text = favorite.name;
                                                 radioBtn.in_var = favorite.in_var;
@@ -309,7 +295,7 @@ ColumnLayout {
                                                         out_var = "--playback="+list_outputs_internal.output_split_internal[out_index]
                                                         print(in_var)
                                                         print(out_var)
-                                                        big_string = 'import QtQuick.Controls 2.0; RadioButton { property var in_index: {} ; property var out_index: {}; property var in_var: {}; property var out_var: {}; onClicked: { in_index = inputComboBox.currentIndex; out_index = outputComboBox.currentIndex; pw_loopback_selected.start("pw-loopback", ["-l", "1", "-n", "loopback", "-m", "[FL FR]", "' + in_var+'", "' +out_var+'" ]); } }'
+                                                        big_string = 'import QtQuick.Controls 2.0; RadioButton { property var in_index: {} ; property var out_index: {}; property var in_var: {}; property var out_var: {}; onClicked: { in_index = inputComboBox.currentIndex; out_index = outputComboBox.currentIndex; pw_loopback.startDetached("pw-loopback", ["-l", "1", "-n", "loopback", "-m", "[FL FR]", "' + in_var+'", "' +out_var+'" ]); } }'
                                                         print(big_string)
                                                         var radioBtn = Qt.createQmlObject(big_string, radioGroup);
                                                         radioBtn.text = in_var2 + " + " + out_var2;

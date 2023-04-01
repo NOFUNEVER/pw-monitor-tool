@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Kprocess_t {
-    QByteArrayData data[9];
-    char stringdata0[62];
+    QByteArrayData data[10];
+    char stringdata0[76];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,14 +37,16 @@ QT_MOC_LITERAL(1, 9, 5), // "start"
 QT_MOC_LITERAL(2, 15, 0), // ""
 QT_MOC_LITERAL(3, 16, 7), // "program"
 QT_MOC_LITERAL(4, 24, 9), // "arguments"
-QT_MOC_LITERAL(5, 34, 7), // "readAll"
-QT_MOC_LITERAL(6, 42, 8), // "readLine"
-QT_MOC_LITERAL(7, 51, 5), // "write"
-QT_MOC_LITERAL(8, 57, 4) // "data"
+QT_MOC_LITERAL(5, 34, 13), // "startDetached"
+QT_MOC_LITERAL(6, 48, 7), // "readAll"
+QT_MOC_LITERAL(7, 56, 8), // "readLine"
+QT_MOC_LITERAL(8, 65, 5), // "write"
+QT_MOC_LITERAL(9, 71, 4) // "data"
 
     },
     "Kprocess\0start\0\0program\0arguments\0"
-    "readAll\0readLine\0write\0data"
+    "startDetached\0readAll\0readLine\0write\0"
+    "data"
 };
 #undef QT_MOC_LITERAL
 
@@ -54,7 +56,7 @@ static const uint qt_meta_data_Kprocess[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -62,18 +64,20 @@ static const uint qt_meta_data_Kprocess[] = {
        0,       // signalCount
 
  // methods: name, argc, parameters, tag, flags
-       1,    2,   39,    2, 0x02 /* Public */,
-       1,    1,   44,    2, 0x02 /* Public */,
-       5,    0,   47,    2, 0x02 /* Public */,
-       6,    0,   48,    2, 0x02 /* Public */,
-       7,    1,   49,    2, 0x02 /* Public */,
+       1,    2,   44,    2, 0x02 /* Public */,
+       5,    2,   49,    2, 0x02 /* Public */,
+       1,    1,   54,    2, 0x02 /* Public */,
+       6,    0,   57,    2, 0x02 /* Public */,
+       7,    0,   58,    2, 0x02 /* Public */,
+       8,    1,   59,    2, 0x02 /* Public */,
 
  // methods: parameters
+    QMetaType::Void, QMetaType::QString, QMetaType::QVariantList,    3,    4,
     QMetaType::Void, QMetaType::QString, QMetaType::QVariantList,    3,    4,
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::QByteArray,
     QMetaType::QByteArray,
-    QMetaType::LongLong, QMetaType::QString,    8,
+    QMetaType::LongLong, QMetaType::QString,    9,
 
        0        // eod
 };
@@ -85,12 +89,13 @@ void Kprocess::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         (void)_t;
         switch (_id) {
         case 0: _t->start((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QVariantList(*)>(_a[2]))); break;
-        case 1: _t->start((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 2: { QByteArray _r = _t->readAll();
+        case 1: _t->startDetached((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QVariantList(*)>(_a[2]))); break;
+        case 2: _t->start((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 3: { QByteArray _r = _t->readAll();
             if (_a[0]) *reinterpret_cast< QByteArray*>(_a[0]) = std::move(_r); }  break;
-        case 3: { QByteArray _r = _t->readLine();
+        case 4: { QByteArray _r = _t->readLine();
             if (_a[0]) *reinterpret_cast< QByteArray*>(_a[0]) = std::move(_r); }  break;
-        case 4: { qint64 _r = _t->write((*reinterpret_cast< const QString(*)>(_a[1])));
+        case 5: { qint64 _r = _t->write((*reinterpret_cast< const QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< qint64*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
@@ -126,13 +131,13 @@ int Kprocess::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

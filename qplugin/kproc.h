@@ -26,6 +26,20 @@ public:
         KProcess::setProgram( program, args);
         KProcess::start();
     }
+        Q_INVOKABLE void startDetached( const QString& program, const QVariantList& arguments )
+    {
+        QStringList args;
+
+
+        // convert QVariantList from QML to QStringList for QProcess
+        for ( const auto& temp : arguments ) {
+            args << temp.toString();
+        }
+
+        KProcess::setOutputChannelMode( KProcess::MergedChannels );
+        KProcess::setProgram( program, args);
+        KProcess::startDetached();
+    }
 
     // If wan to start without arguments for Qt > 5.14
     Q_INVOKABLE void start( const QString& program )
