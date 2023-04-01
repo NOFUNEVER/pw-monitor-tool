@@ -31,16 +31,26 @@ plasma_install_package(package com.github.nofunever.pw_monitor_tool)
 
 add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_com.github.nofunever.pw_monitor_tool\")
 
-set(pw_monitor_toolplugin_SRCS
-    plugin/monitor-tool.cpp
-    plugin/monitor-tool.h
-    plugin/pw_monitor_toolplugin.cpp
-    plugin/pw_monitor_toolplugin.h
+set(qproc_plugin_SRCS
+    qplugin/qproc.cpp
+    qplugin/qproc.h
+    qplugin/qproc_plugin.cpp
+    qplugin/qproc_plugin.h
 )
 
-add_library(pw_monitor_toolplugin SHARED ${pw_monitor_toolplugin_SRCS})
+set(kproc_plugin_SRCS
+    kplugin/kproc.cpp
+    kplugin/kproc.h
+    kplugin/kproc_plugin.cpp
+    kplugin/kproc_plugin.h
+)
 
-target_link_libraries(pw_monitor_toolplugin
+add_library(qproc_plugin SHARED ${qproc_plugin_SRCS})
+
+add_library(kproc_plugin SHARED ${kproc_plugin_SRCS})
+
+
+target_link_libraries(qproc_plugin
     Qt::Core
     Qt::Qml
     KF5::CoreAddons
@@ -48,6 +58,16 @@ target_link_libraries(pw_monitor_toolplugin
     # KF5::Plasma
     # KF5::I18n
 )
+target_link_libraries(kproc_plugin
+    Qt::Core
+    Qt::Qml
+    KF5::CoreAddons
+    KF5::ConfigCore
+    # KF5::Plasma
+    # KF5::I18n
+)
+install(TARGETS qproc_plugin DESTINATION ${KDE_INSTALL_QMLDIR}/com/github/nofunever/pw_monitor_tool/qpp)
+install(FILES qplugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/com/github/nofunever/pw_monitor_tool/qpp)
 
-install(TARGETS pw_monitor_toolplugin DESTINATION ${KDE_INSTALL_QMLDIR}/com/github/nofunever/pw_monitor_tool)
-install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/com/github/nofunever/pw_monitor_tool)
+install(TARGETS kproc_plugin DESTINATION ${KDE_INSTALL_QMLDIR}/com/github/nofunever/pw_monitor_tool/kpp)
+install(FILES kplugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/com/github/nofunever/pw_monitor_tool/kpp)

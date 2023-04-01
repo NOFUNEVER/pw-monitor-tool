@@ -4,7 +4,7 @@
 #include <QQmlEngine>
 #include <QQmlExtensionPlugin>
 
-class pw_monitor_toolPlugin : public QQmlExtensionPlugin
+class qproc_Plugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")

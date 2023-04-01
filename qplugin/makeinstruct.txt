@@ -1,0 +1,2 @@
+ 
+(cd ./build && cmake .. -DCMAKE_INSTALL_PREFIX=/usr && make && sudo make install) && plasmoidviewer -a com.github.nofunever.pw_monitor_tool
