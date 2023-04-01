@@ -50,9 +50,25 @@ public:
         KProcess::start();
         KProcess::open( KProcess::ReadWrite );
     }
+    Q_INVOKABLE bool waitForReadyRead(int msecs)
+    {
+        return KProcess::waitForReadyRead(msecs);
+        
+
+
+    }
+
+     Q_INVOKABLE bool waitForFinished(int msecs)
+    {
+        return KProcess::waitForFinished(msecs)    ;    
+
+
+    }
 
     Q_INVOKABLE QByteArray readAll() { return KProcess::readAll(); }
     Q_INVOKABLE QByteArray readLine() { return KProcess::readLine(); }
+
+    
 
     // if you want to write to an active process, not fully tested!
     Q_INVOKABLE qint64 write( const QString& data )

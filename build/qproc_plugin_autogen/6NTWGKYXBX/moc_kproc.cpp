@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Kprocess_t {
-    QByteArrayData data[10];
-    char stringdata0[76];
+    QByteArrayData data[13];
+    char stringdata0[115];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,14 +38,18 @@ QT_MOC_LITERAL(2, 15, 0), // ""
 QT_MOC_LITERAL(3, 16, 7), // "program"
 QT_MOC_LITERAL(4, 24, 9), // "arguments"
 QT_MOC_LITERAL(5, 34, 13), // "startDetached"
-QT_MOC_LITERAL(6, 48, 7), // "readAll"
-QT_MOC_LITERAL(7, 56, 8), // "readLine"
-QT_MOC_LITERAL(8, 65, 5), // "write"
-QT_MOC_LITERAL(9, 71, 4) // "data"
+QT_MOC_LITERAL(6, 48, 16), // "waitForReadyRead"
+QT_MOC_LITERAL(7, 65, 5), // "msecs"
+QT_MOC_LITERAL(8, 71, 15), // "waitForFinished"
+QT_MOC_LITERAL(9, 87, 7), // "readAll"
+QT_MOC_LITERAL(10, 95, 8), // "readLine"
+QT_MOC_LITERAL(11, 104, 5), // "write"
+QT_MOC_LITERAL(12, 110, 4) // "data"
 
     },
     "Kprocess\0start\0\0program\0arguments\0"
-    "startDetached\0readAll\0readLine\0write\0"
+    "startDetached\0waitForReadyRead\0msecs\0"
+    "waitForFinished\0readAll\0readLine\0write\0"
     "data"
 };
 #undef QT_MOC_LITERAL
@@ -56,7 +60,7 @@ static const uint qt_meta_data_Kprocess[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,20 +68,24 @@ static const uint qt_meta_data_Kprocess[] = {
        0,       // signalCount
 
  // methods: name, argc, parameters, tag, flags
-       1,    2,   44,    2, 0x02 /* Public */,
-       5,    2,   49,    2, 0x02 /* Public */,
-       1,    1,   54,    2, 0x02 /* Public */,
-       6,    0,   57,    2, 0x02 /* Public */,
-       7,    0,   58,    2, 0x02 /* Public */,
-       8,    1,   59,    2, 0x02 /* Public */,
+       1,    2,   54,    2, 0x02 /* Public */,
+       5,    2,   59,    2, 0x02 /* Public */,
+       1,    1,   64,    2, 0x02 /* Public */,
+       6,    1,   67,    2, 0x02 /* Public */,
+       8,    1,   70,    2, 0x02 /* Public */,
+       9,    0,   73,    2, 0x02 /* Public */,
+      10,    0,   74,    2, 0x02 /* Public */,
+      11,    1,   75,    2, 0x02 /* Public */,
 
  // methods: parameters
     QMetaType::Void, QMetaType::QString, QMetaType::QVariantList,    3,    4,
     QMetaType::Void, QMetaType::QString, QMetaType::QVariantList,    3,    4,
     QMetaType::Void, QMetaType::QString,    3,
+    QMetaType::Bool, QMetaType::Int,    7,
+    QMetaType::Bool, QMetaType::Int,    7,
     QMetaType::QByteArray,
     QMetaType::QByteArray,
-    QMetaType::LongLong, QMetaType::QString,    9,
+    QMetaType::LongLong, QMetaType::QString,   12,
 
        0        // eod
 };
@@ -91,11 +99,15 @@ void Kprocess::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 0: _t->start((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QVariantList(*)>(_a[2]))); break;
         case 1: _t->startDetached((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QVariantList(*)>(_a[2]))); break;
         case 2: _t->start((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 3: { QByteArray _r = _t->readAll();
+        case 3: { bool _r = _t->waitForReadyRead((*reinterpret_cast< int(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
+        case 4: { bool _r = _t->waitForFinished((*reinterpret_cast< int(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
+        case 5: { QByteArray _r = _t->readAll();
             if (_a[0]) *reinterpret_cast< QByteArray*>(_a[0]) = std::move(_r); }  break;
-        case 4: { QByteArray _r = _t->readLine();
+        case 6: { QByteArray _r = _t->readLine();
             if (_a[0]) *reinterpret_cast< QByteArray*>(_a[0]) = std::move(_r); }  break;
-        case 5: { qint64 _r = _t->write((*reinterpret_cast< const QString(*)>(_a[1])));
+        case 7: { qint64 _r = _t->write((*reinterpret_cast< const QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< qint64*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
@@ -131,13 +143,13 @@ int Kprocess::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 8)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 8;
     }
     return _id;
 }
