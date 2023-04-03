@@ -16,6 +16,8 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 find_package(Qt5 REQUIRED COMPONENTS
     Core
     Qml
+    Quick
+    Multimedia
 
 
 )
@@ -36,6 +38,8 @@ set(qproc_plugin_SRCS
     qplugin/qproc_plugin.cpp
     qplugin/qproc_plugin.h
     qplugin/kproc.h
+    qplugin/audiodevicewrapper.cpp
+    qplugin/audiodevicewrapper.h
 )
 
 
@@ -47,8 +51,11 @@ add_library(qproc_plugin SHARED ${qproc_plugin_SRCS})
 target_link_libraries(qproc_plugin
     Qt::Core
     Qt::Qml
+    Qt::Quick
+    Qt5::Multimedia
     KF5::CoreAddons
     KF5::ConfigCore
+
     # KF5::Plasma
     # KF5::I18n
 )

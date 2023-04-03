@@ -1,7 +1,7 @@
 CMakeFiles/qproc_plugin.dir/qproc_plugin_autogen/mocs_compilation.cpp.o: \
  /home/jkl/pw-monitor-tool/build/qproc_plugin_autogen/mocs_compilation.cpp \
  /usr/include/stdc-predef.h \
- /home/jkl/pw-monitor-tool/build/qproc_plugin_autogen/6NTWGKYXBX/moc_kproc.cpp \
+ /home/jkl/pw-monitor-tool/build/qproc_plugin_autogen/6NTWGKYXBX/moc_audiodevicewrapper.cpp \
  /usr/include/c++/12/memory /usr/include/c++/12/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/12/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/12/bits/os_defines.h \
@@ -111,13 +111,11 @@ CMakeFiles/qproc_plugin.dir/qproc_plugin_autogen/mocs_compilation.cpp.o: \
  /usr/include/c++/12/bits/atomic_base.h \
  /usr/include/c++/12/bits/atomic_lockfree_defines.h \
  /usr/include/c++/12/backward/auto_ptr.h \
- /home/jkl/pw-monitor-tool/build/qproc_plugin_autogen/6NTWGKYXBX/../../../qplugin/kproc.h \
- /usr/include/KF5/KCoreAddons/KProcess \
- /usr/include/KF5/KCoreAddons/kprocess.h \
- /usr/include/KF5/KCoreAddons/kcoreaddons_export.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/QProcess \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qprocess.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qiodevice.h \
+ /home/jkl/pw-monitor-tool/build/qproc_plugin_autogen/6NTWGKYXBX/../../../qplugin/audiodevicewrapper.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/QObject \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qobjectdefs.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qnamespace.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qglobal.h \
  /usr/include/c++/12/cstddef /usr/include/c++/12/utility \
  /usr/include/c++/12/bits/stl_relops.h \
@@ -153,9 +151,6 @@ CMakeFiles/qproc_plugin.dir/qproc_plugin_autogen/mocs_compilation.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qglobalstatic.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qnumeric.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qversiontagging.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qobjectdefs.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qnamespace.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qobjectdefs_impl.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qstring.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qchar.h \
@@ -234,8 +229,26 @@ CMakeFiles/qproc_plugin.dir/qproc_plugin_autogen/mocs_compilation.cpp.o: \
  /usr/include/c++/12/chrono /usr/include/c++/12/bits/chrono.h \
  /usr/include/c++/12/ratio /usr/include/c++/12/limits \
  /usr/include/c++/12/ctime /usr/include/c++/12/bits/parse_numbers.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtMultimedia/QAudioDeviceInfo \
+ /usr/include/x86_64-linux-gnu/qt5/QtMultimedia/qaudiodeviceinfo.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtMultimedia/qtmultimediaglobal.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtGui/qtguiglobal.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtGui/qtgui-config.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtMultimedia/qtmultimedia-config.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtMultimedia/qmultimedia.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtMultimedia/qaudio.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtMultimedia/qaudioformat.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qshareddata.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qhash.h \
+ /home/jkl/pw-monitor-tool/build/qproc_plugin_autogen/6NTWGKYXBX/moc_kproc.cpp \
+ /home/jkl/pw-monitor-tool/build/qproc_plugin_autogen/6NTWGKYXBX/../../../qplugin/kproc.h \
+ /usr/include/KF5/KCoreAddons/KProcess \
+ /usr/include/KF5/KCoreAddons/kprocess.h \
+ /usr/include/KF5/KCoreAddons/kcoreaddons_export.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/QProcess \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qprocess.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qiodevice.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qmap.h \

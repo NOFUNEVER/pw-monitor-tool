@@ -50,6 +50,15 @@ public:
         KProcess::start();
         KProcess::open( KProcess::ReadWrite );
     }
+
+       Q_INVOKABLE void startDetached( const QString& program )
+    {
+
+        KProcess::setOutputChannelMode( KProcess::MergedChannels );
+        KProcess::setProgram( program );
+        KProcess::startDetached();
+    
+    }
     Q_INVOKABLE bool waitForReadyRead(int msecs)
     {
         return KProcess::waitForReadyRead(msecs);

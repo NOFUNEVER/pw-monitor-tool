@@ -301,6 +301,30 @@ qproc_plugin_autogen/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/qproc_plugin_autogen.dir/build.make CMakeFiles/qproc_plugin_autogen.dir/build
 .PHONY : qproc_plugin_autogen/fast
 
+qplugin/audiodevicewrapper.o: qplugin/audiodevicewrapper.cpp.o
+.PHONY : qplugin/audiodevicewrapper.o
+
+# target to build an object file
+qplugin/audiodevicewrapper.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qproc_plugin.dir/build.make CMakeFiles/qproc_plugin.dir/qplugin/audiodevicewrapper.cpp.o
+.PHONY : qplugin/audiodevicewrapper.cpp.o
+
+qplugin/audiodevicewrapper.i: qplugin/audiodevicewrapper.cpp.i
+.PHONY : qplugin/audiodevicewrapper.i
+
+# target to preprocess a source file
+qplugin/audiodevicewrapper.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qproc_plugin.dir/build.make CMakeFiles/qproc_plugin.dir/qplugin/audiodevicewrapper.cpp.i
+.PHONY : qplugin/audiodevicewrapper.cpp.i
+
+qplugin/audiodevicewrapper.s: qplugin/audiodevicewrapper.cpp.s
+.PHONY : qplugin/audiodevicewrapper.s
+
+# target to generate assembly for a file
+qplugin/audiodevicewrapper.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/qproc_plugin.dir/build.make CMakeFiles/qproc_plugin.dir/qplugin/audiodevicewrapper.cpp.s
+.PHONY : qplugin/audiodevicewrapper.cpp.s
+
 qplugin/qproc_plugin.o: qplugin/qproc_plugin.cpp.o
 .PHONY : qplugin/qproc_plugin.o
 
@@ -372,6 +396,9 @@ help:
 	@echo "... qproc_plugin_autogen"
 	@echo "... uninstall"
 	@echo "... qproc_plugin"
+	@echo "... qplugin/audiodevicewrapper.o"
+	@echo "... qplugin/audiodevicewrapper.i"
+	@echo "... qplugin/audiodevicewrapper.s"
 	@echo "... qplugin/qproc_plugin.o"
 	@echo "... qplugin/qproc_plugin.i"
 	@echo "... qplugin/qproc_plugin.s"

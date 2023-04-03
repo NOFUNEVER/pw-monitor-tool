@@ -1,7 +1,7 @@
  
 #include "qproc_plugin.h"
 #include "qproc.h"
-
+#include "audiodevicewrapper.h"
 
 #include "kproc.h"
 
@@ -14,6 +14,7 @@ void qproc_Plugin::registerTypes(const char *uri)
 
     qmlRegisterType<Process>(uri, 1, 0, "Process");
     qmlRegisterType<Kprocess>(uri, 1, 0, "Kprocess");
+    qmlRegisterType<AudioDeviceInfoWrapper>(uri, 1, 0, "AudioDeviceInfoWrapper");
 
 
 }
