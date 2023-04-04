@@ -6,7 +6,7 @@
     <summary>A widget to simplfy monitoring inputs with pw-loopback</summary>
     <url type="homepage">https://github.com/nofunever/plasmoid-pw_monitor_tool</url>
     <developer_name>Jason K Lamphere &lt;jason.lamphere@gmail.com&gt;</developer_name>
-    <icon type="stock">battery</icon>
+    <icon type="stock">circular-arrow-shape</icon>
     <project_license></project_license>
     <metadata_license>CC0-1.0</metadata_license>
 </component>

@@ -34,6 +34,9 @@ ColumnLayout {
     property string playback_props:"--playback-props='[media.class=Audio/Source]'"
     property alias defaultInputDeviceName: audioDeviceInfo.defaultInputDeviceName
     property alias defaultOutputDeviceName: audioDeviceInfo.defaultOutputDeviceName
+
+
+
     Kprocess {
         id: list_devices
 
@@ -98,7 +101,7 @@ ColumnLayout {
             text: i18n(root.getLoopbackText() ) //+ input_list[internal_input_list.indexOf(defaultInputDeviceName)] +" => "+ output_list[internal_output_list.indexOf(defaultOutputDeviceName)] )
             autoExclusive: true
             onClicked: {
-                pw_loopback.startDetached("pw-loopback")
+                pw_loopback.startDetached("pw-loopback",["-l","32"])
             }
         }
 
@@ -116,7 +119,7 @@ ColumnLayout {
                 out_index = outputComboBox.currentIndex
                 in_var = "--capture=" + internal_input_list[in_index]
                 out_var = "--playback=" + internal_output_list[out_index]
-                argz = ["-l", "1", "-n", "loopback", "-m", "[FL FR]", in_var, out_var]
+                argz = ["-l", "32", "-n", "loopback", "-m", "[FL FR]", in_var, out_var]
                 pw_loopback.startDetached("pw-loopback", argz)
             }
         }
@@ -134,7 +137,7 @@ ColumnLayout {
                 out_index = outputComboBox.currentIndex
                 in_var = "--capture=" + internal_input_list[in_index]
                 out_var = "--playback=" + internal_output_list[out_index]
-                argz = ["-l", "1", "-n", "loopback", "-m", "[FL FR]", capture_props, in_var]
+                argz = ["-l", "32", "-n", "loopback", "-m", "[FL FR]", capture_props, in_var]
                 pw_loopback.startDetached("pw-loopback", argz)
             }
         }
@@ -152,7 +155,7 @@ ColumnLayout {
                 out_index = outputComboBox.currentIndex
                 in_var = "--capture=" + internal_input_list[in_index]
                 out_var = "--playback=" + internal_output_list[out_index]
-                argz = ["-l", "1", "-n", "loopback", "-m", "[FL FR]", playback_props, out_var]
+                argz = ["-l", "32", "-n", "loopback", "-m", "[FL FR]", playback_props, out_var]
                 pw_loopback.startDetached("pw-loopback", argz)
             }
         }
@@ -174,7 +177,7 @@ ColumnLayout {
         property var maxWidth: 0;
         PlasmaComponents3.ComboBox {
             Layout.alignment: Qt.AlignHCenter
-            width: 300
+            width: 400
             height:20
             id: inputComboBox
 
@@ -182,7 +185,7 @@ ColumnLayout {
             model: input_list
             delegate: ItemDelegate {
             text: modelData
-            width: 400
+            width: 500
             }
         }
         PlasmaComponents3.Label {
@@ -234,7 +237,7 @@ ColumnLayout {
         list_devices.start("bash", ["-c", "pw-cli ls Node | grep -B 3 'Audio/Source' | grep 'node.description' | cut -d \\\" -f2 "])
         list_devices.waitForReadyRead(-1)
         input_list = temp_list
-        
+        inputComboBox.width = findMaxWidth(input_list)
         list_devices.waitForFinished(-1)
         list_devices.destroy()
 
@@ -270,7 +273,7 @@ ColumnLayout {
                 var favorite = rs.rows.item(i);
                 var big_string = "";
 
-                big_string = 'import org.kde.plasma.components 3.0; RadioButton { property var in_var: {}; property var out_var: {}; onClicked: { pw_loopback.startDetached("pw-loopback", ["-l", "1", "-n", "loopback", "-m", "[FL FR]", "' + favorite.in_var + '", "' + favorite.out_var + '" ]); } }'
+                big_string = 'import org.kde.plasma.components 3.0; RadioButton { property var in_var: {}; property var out_var: {}; onClicked: { pw_loopback.startDetached("pw-loopback", ["-l", "32", "-n", "loopback", "-m", "[FL FR]", "' + favorite.in_var + '", "' + favorite.out_var + '" ]); } }'
 
                 var radioBtn = Qt.createQmlObject(big_string, radioGroup);
                 radioBtn.text = favorite.name;
@@ -278,6 +281,8 @@ ColumnLayout {
                 radioBtn.out_var = favorite.out_var
             }
         });
+
+        inputComboBox.width = findMaxWidth(input_list) + 30; // Add extra padding for the dropdown arrow
     }
 
  PlasmaComponents3.Popup {
@@ -344,11 +349,28 @@ ColumnLayout {
             in_var = "--capture=" + internal_input_list[in_index]
             out_var = "--playback=" + internal_output_list[out_index]
          
-            big_string = 'import QtQuick.Controls 2.0; RadioButton { property var in_index: {}; property var out_index: {}; property var in_var: {}; property var out_var: {}; onClicked: { in_index = inputComboBox.currentIndex; out_index = outputComboBox.currentIndex; pw_loopback.startDetached("pw-loopback", ["-l", "1", "-n", "loopback", "-m", "[FL FR]", "' + in_var + '", "' + out_var + '" ]); } }'
+            big_string = 'import QtQuick.Controls 2.0; RadioButton { property var in_index: {}; property var out_index: {}; property var in_var: {}; property var out_var: {}; onClicked: { in_index = inputComboBox.currentIndex; out_index = outputComboBox.currentIndex; pw_loopback.startDetached("pw-loopback", ["-l", "32", "-n", "loopback", "-m", "[FL FR]", "' + in_var + '", "' + out_var + '" ]); } }'
       
             popup.open()
         
         }
+    }
+    function findMaxWidth(listModel) {
+        var maxLength = 0;
+        var tempText = Qt.createQmlObject('import QtQuick 2.0; Text { }', root);
+
+        for (var i = 0; i < listModel.count; i++) {
+            var currentString = listModel.get(i).value;
+            tempText.text = currentString;
+            var currentWidth = tempText.width;
+
+            if (currentWidth > maxLength) {
+                maxLength = currentWidth;
+            }
+        }
+
+        tempText.destroy();
+        return maxLength;
     }
 
     PlasmaComponents3.Button {

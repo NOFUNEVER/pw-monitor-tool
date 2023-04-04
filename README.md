@@ -1,36 +1,6 @@
 PW-Loopback-UI Plasmoid
-This plasmoid offers a simple user interface for the pipewire-loopback module. Written in qml and C++, only compatible with pipewire.
 
-Credit
- Jason Lamphere.
+A barebones UI for the pw-loopback tool to provide convienent listening or monitoring functionality that is available in most mainstream operating systems but missing in the default audio widget in kde and take it step further by providing additional flexibility to monitor independent of system defaults. Intended to fill an immediate need for convienent monitoring of my inputs with control over the output being independent of system settings and serve as a way to get my feet wet with Plasmoid development before moving on to attempt a full fledged pipewire audio widget using the pipewire c api with the additional features provided by this tool built in. By falling back on pw-cli and pw-loopback for this iteration i'm able provide myself some additional convience immediately as I frequently route different devices to my computer for playback over my speakers and headphones. 
 
-Features
-PW-Loopback-UI has the following features:
-
-Lists all available audio inputs and outputs.
-Allows the user to create a loopback with system defaults or manually select an input and output to create a loopback.
-TODO::Displays the current loopback status and allows the user to turn it on or off.
-
-Installation
-To test the PW-Loopback-UI plasmoid, follow these steps:
-
-Install pipewire if it is not already installed. The plasmoid is only compatible with pipewire.
-Download the source code from the GitHub repository.
-Build the plasmoid using the following commands:
-
-
-(cd ./build && cmake .. -DCMAKE_INSTALL_PREFIX=/usr && make && sudo make install) && plasmoidviewer -a com.github.nofunever.pw_monitor_tool
-
-
-Usage
-To use the PW-Loopback-UI plasmoid, follow these steps:
-
-Click on the plasmoid to open it.
-The plasmoid will display a list of all available audio inputs and outputs.
-Select the desired settings:
-Default: Turns off the loopback.
-Loopback Defaults: Creates a loopback using the default settings.
-Loopback Selected: Creates a loopback using the selected input and output.
-If you selected "Loopback Selected", select the desired input and output from the dropdown menus.
-Click on the "Favorite" button to create loopback from the current settings and added it beneath the default options.
-TODOThe plasmoid will display the current loopback status and allow you to turn it on or off.
+To test download the repo, inside of the pw-loopback-tool directory create a new directory called build. outside of that directory but inside pw-loopback-tool, from your terminal run cmake .. -DCMAKE_INSTALL_PREFIX=/usr && make && sudo make install
+you should then be able to add widget to your toolbar.

@@ -9,7 +9,7 @@
         ],
         "Category": "Audio Tool",
         "Description": "A widget to simplfy monitoring inputs with pw-loopback",
-        "Icon": "battery",
+        "Icon": "circular-arrow-shape",
         "Id": "com.github.nofunever.pw_monitor_tool",
         "Name": "PW Monitor Tool",
         "ServiceTypes": [
