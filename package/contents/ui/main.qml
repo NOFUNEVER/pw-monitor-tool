@@ -21,7 +21,7 @@ ColumnLayout {
         height: 30
     }
 
-    width: 500
+    width: 1000
     height: 1980
 
     property var favoritesDB: null
@@ -35,7 +35,27 @@ ColumnLayout {
     property alias defaultInputDeviceName: audioDeviceInfo.defaultInputDeviceName
     property alias defaultOutputDeviceName: audioDeviceInfo.defaultOutputDeviceName
 
+ function getDefaultInput() {
+    var inputIndex = internal_input_list.indexOf(defaultInputDeviceName);
+   
 
+    if (inputIndex === -1 ) {
+        return qsTr("Default In/Out: Not set");
+    }
+
+    return qsTr("  %1 ").arg(input_list[inputIndex]);
+}
+
+ function getDefaultOutput() {
+    var outputIndex = internal_output_list.indexOf(defaultOutputDeviceName);
+   
+
+    if (outputIndex === -1 ) {
+        return qsTr("Default In/Out: Not set");
+    }
+
+    return qsTr("  %1 ").arg(output_list[outputIndex]);
+}
 
     Kprocess {
         id: list_devices
@@ -74,9 +94,97 @@ ColumnLayout {
             output = destroy.readAll()
         }
     }
+    ColumnLayout{
+    
 
+
+        PlasmaComponents3.Label {
+
+            text: i18n("Inputs")
+            height:20
+        }
+   RowLayout{
+        PlasmaComponents3.ComboBox {
+           
+            width: 300
+            height:20
+            id: inputComboBox
+
+         
+            model: input_list
+            delegate: ItemDelegate {
+            text: modelData
+            width: 300
+            }
+        }
+                PlasmaComponents3.RadioButton {
+            property var in_var: {}
+            property var out_var: {}
+            property var argz: {}
+            property var in_index: {}
+            property var out_index: {}
+            width: 300
+          text: i18n("==> Link Default Output: " + root.getDefaultOutput())
+            autoExclusive: true
+            onClicked: {
+                in_index = inputComboBox.currentIndex
+                out_index = outputComboBox.currentIndex
+                in_var = "--capture=" + internal_input_list[in_index]
+                out_var = "--playback=" + internal_output_list[out_index]
+                argz = ["-l", "32", "-n", "loopback", "-m", "[FL FR]", capture_props, in_var]
+                pw_loopback.startDetached("pw-loopback", argz)
+            }
+        }
+      
+    }
+ 
+       PlasmaComponents3.Label {
+
+            text: i18n("Outputs")
+            height:20
+        }
+    RowLayout{
+    PlasmaComponents3.ComboBox {
+        
+        width: 300
+        height: 20
+        id: outputComboBox
+
+   
+        model: output_list
+        delegate: ItemDelegate {
+            text: modelData
+            width: 300
+        }
+    }
+
+        PlasmaComponents3.RadioButton {
+            property var in_var: {}
+            property var out_var: {}
+            property var argz: {}
+            property var in_index: {}
+            property var out_index: {}
+            width: 300
+    text: i18n("<== Link Default Input: " + root.getDefaultInput())
+            autoExclusive: true
+            onClicked: {
+                in_index = inputComboBox.currentIndex
+                out_index = outputComboBox.currentIndex
+                in_var = "--capture=" + internal_input_list[in_index]
+                out_var = "--playback=" + internal_output_list[out_index]
+                argz = ["-l", "32", "-n", "loopback", "-m", "[FL FR]", playback_props, out_var]
+                pw_loopback.startDetached("pw-loopback", argz)
+            }
+        }
+
+    }
+    }
+
+
+
+    Row {
     Column {
-        id: radioGroup
+        
 
         PlasmaComponents3.Label {
             text: i18n("Defaults")
@@ -96,7 +204,7 @@ ColumnLayout {
             }
         }
         PlasmaComponents3.RadioButton {
-            width: 800
+            width: 400
             //text: i18n(root.getLoopbackText())
             text: i18n(root.getLoopbackText() ) //+ input_list[internal_input_list.indexOf(defaultInputDeviceName)] +" => "+ output_list[internal_output_list.indexOf(defaultOutputDeviceName)] )
             autoExclusive: true
@@ -123,88 +231,21 @@ ColumnLayout {
                 pw_loopback.startDetached("pw-loopback", argz)
             }
         }
-        PlasmaComponents3.RadioButton {
-            property var in_var: {}
-            property var out_var: {}
-            property var argz: {}
-            property var in_index: {}
-            property var out_index: {}
-            width: 300
-            text: i18n("Selected Input to Default Output")
-            autoExclusive: true
-            onClicked: {
-                in_index = inputComboBox.currentIndex
-                out_index = outputComboBox.currentIndex
-                in_var = "--capture=" + internal_input_list[in_index]
-                out_var = "--playback=" + internal_output_list[out_index]
-                argz = ["-l", "32", "-n", "loopback", "-m", "[FL FR]", capture_props, in_var]
-                pw_loopback.startDetached("pw-loopback", argz)
-            }
-        }
-        PlasmaComponents3.RadioButton {
-            property var in_var: {}
-            property var out_var: {}
-            property var argz: {}
-            property var in_index: {}
-            property var out_index: {}
-            width: 300
-            text: i18n("Default Input to Selected Output")
-            autoExclusive: true
-            onClicked: {
-                in_index = inputComboBox.currentIndex
-                out_index = outputComboBox.currentIndex
-                in_var = "--capture=" + internal_input_list[in_index]
-                out_var = "--playback=" + internal_output_list[out_index]
-                argz = ["-l", "32", "-n", "loopback", "-m", "[FL FR]", playback_props, out_var]
-                pw_loopback.startDetached("pw-loopback", argz)
-            }
-        }
-        PlasmaComponents3.Label {
+
+  
+    }
+    Column{
+id: radioGroup
+   PlasmaComponents3.Label {
             text: i18n("Favorites")
             height: 35
         }
-    }
 
+
+    }
+}
    AudioDeviceInfoWrapper {
         id: audioDeviceInfo
-    }
-
-        PlasmaComponents3.Label {
-
-            text: i18n("Inputs")
-            height:20
-        }
-        property var maxWidth: 0;
-        PlasmaComponents3.ComboBox {
-            Layout.alignment: Qt.AlignHCenter
-            width: 400
-            height:20
-            id: inputComboBox
-
-         
-            model: input_list
-            delegate: ItemDelegate {
-            text: modelData
-            width: 500
-            }
-        }
-        PlasmaComponents3.Label {
-            Layout.alignment: Qt.AlignLeft
-            text: i18n("Outputs")
-            height: 20
-        }
-    PlasmaComponents3.ComboBox {
-        Layout.alignment: Qt.AlignHCenter
-       width: 200
-        height: 20
-        id: outputComboBox
-
-   
-        model: output_list
-        delegate: ItemDelegate {
-            text: modelData
-            width: 400
-        }
     }
 
  function getLoopbackText() {
@@ -215,7 +256,7 @@ ColumnLayout {
         return qsTr("Default In/Out: Not set");
     }
 
-    return qsTr("Default In/Out:  %1 => %2").arg(input_list[inputIndex]).arg(output_list[outputIndex]);
+    return qsTr("Default In/Out: ");
 }
   Connections {
         target: root
