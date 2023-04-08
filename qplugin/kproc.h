@@ -26,7 +26,7 @@ public:
         KProcess::setProgram( program, args);
         KProcess::start();
     }
-        Q_INVOKABLE void startDetached( const QString& program, const QVariantList& arguments )
+        Q_INVOKABLE qint64 startDetached( const QString& program, const QVariantList& arguments )
     {
         QStringList args;
 
@@ -36,10 +36,23 @@ public:
             args << temp.toString();
         }
 
-        KProcess::setOutputChannelMode( KProcess::MergedChannels );
-        KProcess::setProgram( program, args);
-        KProcess::startDetached();
+        QProcess process; // Create an instance of KProcess
+   // process->setOutputChannelMode(KProcess::MergedChannels);
+    process.setProgram(program);
+    process.setArguments(args);
+
+    // Check if the process started successfully
+ qint64 pid;
+    bool success = process.startDetached(&pid); // Pass a pointer to store the PID
+
+    if (success) {
+        return pid;
+    } else {
+        return 0; // Return 0 if the process failed to start
     }
+    }
+
+    
 
     // If wan to start without arguments for Qt > 5.14
     Q_INVOKABLE void start( const QString& program )

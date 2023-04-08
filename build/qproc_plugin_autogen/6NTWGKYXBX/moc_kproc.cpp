@@ -80,7 +80,7 @@ static const uint qt_meta_data_Kprocess[] = {
 
  // methods: parameters
     QMetaType::Void, QMetaType::QString, QMetaType::QVariantList,    3,    4,
-    QMetaType::Void, QMetaType::QString, QMetaType::QVariantList,    3,    4,
+    QMetaType::LongLong, QMetaType::QString, QMetaType::QVariantList,    3,    4,
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Bool, QMetaType::Int,    7,
@@ -99,7 +99,8 @@ void Kprocess::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         (void)_t;
         switch (_id) {
         case 0: _t->start((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QVariantList(*)>(_a[2]))); break;
-        case 1: _t->startDetached((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QVariantList(*)>(_a[2]))); break;
+        case 1: { qint64 _r = _t->startDetached((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QVariantList(*)>(_a[2])));
+            if (_a[0]) *reinterpret_cast< qint64*>(_a[0]) = std::move(_r); }  break;
         case 2: _t->start((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 3: _t->startDetached((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 4: { bool _r = _t->waitForReadyRead((*reinterpret_cast< int(*)>(_a[1])));
