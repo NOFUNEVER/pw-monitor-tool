@@ -11,9 +11,9 @@ import QtQuick.LocalStorage 2.0
 import org.kde.kcoreaddons 1.0 as Kcoreaddons
 import QtMultimedia 5.12
 
-Item {
+ColumnLayout{
     
-
+    
     width: 600
     height: 600
 
@@ -285,6 +285,7 @@ ColumnLayout{
                 property var argz: {}
                 property var in_index: {}
                 property var out_index: {}
+                property string big_string2: " "
                 width: 200
                 Layout.topMargin:20
                 Layout.rightMargin:50
@@ -297,6 +298,17 @@ ColumnLayout{
                      if (checked == false){
                             
                             destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
+                                  for(var i = 0; i < runningRadioGroup.children.length; ++i){
+                                var child = runningRadioGroup.children[i];
+                                if( child instanceof PlasmaComponents3.RadioButton && child.text === in_var + " + " + out_var){
+                                    child.destroy();
+                                    break;
+                                }
+
+
+                            }
+
+
                      }else{
                     in_index = inputComboBox.currentIndex
                     out_index = outputComboBox.currentIndex
@@ -304,6 +316,9 @@ ColumnLayout{
                     out_var = "--playback=" + internal_output_list[out_index]
                     argz = ["-l", "32", "-n", "loopback", "-m", "[FL FR]", in_var, out_var]
                     pw_loopback.startDetached("pw-loopback", argz)
+                     big_string2 = 'import org.kde.plasma.components 3.0; RadioButton { autoExclusive: false; checked: true; property var in_index: {}; property var out_index: {}; property var in_var: {}; property var out_var: {}; onClicked: {  } }'
+                        var radioBtn = Qt.createQmlObject(big_string2, runningRadioGroup);
+                        radioBtn.text = in_var + " + " + out_var;
                 }
                 }
             }
@@ -357,7 +372,7 @@ ColumnLayout{
 
                             for(var i = 0; i < runningRadioGroup.children.length; ++i){
                                 var child = runningRadioGroup.children[i];
-                                if( child instanceof PlasmaComponents3.RadioButton && child.text === out_var){
+                                if( child instanceof PlasmaComponents3.RadioButton && child.text ===  out_var){
                                     child.destroy();
                                     break;
                                 }
@@ -404,14 +419,28 @@ ColumnLayout{
              width: 400
                 Layout.topMargin:20
                 Layout.alignment: Qt.AlignRight
+                property string big_string2: ""
              text: i18n(getLoopbackText() ) 
             autoExclusive: false
             onClicked: {
                      if (checked == false){
                             
                             destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
+   for(var i = 0; i < runningRadioGroup.children.length; ++i){
+                                var child = runningRadioGroup.children[i];
+                                if( child instanceof PlasmaComponents3.RadioButton && child.text ===  "Defaults: pw-loopback"){
+                                    child.destroy();
+                                    break;
+                                }
+
+
+                            }
+
                      }else{
                 pw_loopback.startDetached("pw-loopback",["-l","32"])
+                   big_string2 = 'import org.kde.plasma.components 3.0; RadioButton { autoExclusive: false; checked: true; property var in_index: {}; property var out_index: {}; property var in_var: {}; property var out_var: {}; onClicked: {  } }'
+                        var radioBtn = Qt.createQmlObject(big_string2, runningRadioGroup);
+                        radioBtn.text = "Defaults: pw-loopback"
                      }
             }
         }
@@ -472,7 +501,7 @@ ColumnLayout{
                       // Remove the radio buttons from the UI
                     for (var i = 0; i < radioGroup.children.length; i++) {
                         var child = radioGroup.children[i];
-                        if (child instanceof RadioButton) {
+                        if (child instanceof PlasmaComponents3.RadioButton) {
                             child.destroy();
                         }
                     }
