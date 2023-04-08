@@ -14,7 +14,7 @@ import QtMultimedia 5.12
 Item {
     
 
-    width: 800
+    width: 600
     height: 600
 
    
@@ -29,7 +29,8 @@ Item {
     property string playback_props:"--playback-props='[media.class=Audio/Source]'"
     property alias defaultInputDeviceName: audioDeviceInfo.defaultInputDeviceName
     property alias defaultOutputDeviceName: audioDeviceInfo.defaultOutputDeviceName
-  
+    property var inindefoutcount:0
+     property string custom_name:""   
     AudioDeviceInfoWrapper {
         id: audioDeviceInfo
     }   
@@ -192,7 +193,7 @@ Item {
 ColumnLayout{
     anchors.fill:parent
     id: root
-
+    
     PlasmaComponents3.Label {
         Layout.alignment: Qt.AlignHCenter
         text: i18n("Pipewire Loopback UI")
@@ -203,15 +204,20 @@ ColumnLayout{
 
     RowLayout{
         id:prim_row1
-
+        Layout.preferredHeight:root.heigh*.66
+        Layout.leftMargin: 10
         ColumnLayout{
             id:upperLeftQuad
-
+            Layout.alignment: Qt.AlignTop
+            
             PlasmaComponents3.Label {
-            text: i18n("Independent Inputs")
+            Layout.alignment: Qt.AlignLeft
+            Layout.rightMargin:60
+                        text: i18n("Independent Inputs")
             height:20         
             }
             RowLayout{
+                id:upper_left_row1
                 PlasmaComponents3.ComboBox {
                     height:30
                     implicitWidth:250
@@ -230,16 +236,44 @@ ColumnLayout{
                     property var argz: {}
                     property var in_index: {}
                     property var out_index: {}
+                    property string big_string2: " "
                     width: 60
-                    text: i18n("==>")
-                    autoExclusive: true
+
+                    property var idd : "b" + inindefoutcount                    
+                    text: i18n(">")
+                    autoExclusive: false
                     onClicked: {
+                        if (checked == false){
+                            in_var = "--capture=" + internal_input_list[in_index]
+                            destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
+
+                            for(var i = 0; i < runningRadioGroup.children.length; ++i){
+                                var child = runningRadioGroup.children[i];
+                                if( child instanceof PlasmaComponents3.RadioButton && child.text === in_var){
+                                    child.destroy();
+                                    break;
+                                }
+
+
+                            }
+                            
+
+
+                        }else{
+
                         in_index = inputComboBox.currentIndex
                         out_index = outputComboBox.currentIndex
                         in_var = "--capture=" + internal_input_list[in_index]
                         out_var = "--playback=" + internal_output_list[out_index]
                         argz = ["-l", "32", "-n", "loopback", "-m", "[FL FR]", capture_props, in_var]
                         pw_loopback.startDetached("pw-loopback", argz)
+                        var argzString = argz.join(' ');
+                        
+                         big_string2 = 'import org.kde.plasma.components 3.0; RadioButton { autoExclusive: false; checked: true; property var in_index: {}; property var out_index: {}; property var in_var: {}; property var out_var: {}; onClicked: {  } }'
+                        var radioBtn = Qt.createQmlObject(big_string2, runningRadioGroup);
+                        radioBtn.text = in_var
+                    
+                        }
                     }
                 }
             }   
@@ -252,9 +286,18 @@ ColumnLayout{
                 property var in_index: {}
                 property var out_index: {}
                 width: 200
+                Layout.topMargin:20
+                Layout.rightMargin:50
+                Layout.alignment: Qt.AlignRight
                 text: i18n("")
-                autoExclusive: true
+                autoExclusive: false
                 onClicked: {
+
+
+                     if (checked == false){
+                            
+                            destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
+                     }else{
                     in_index = inputComboBox.currentIndex
                     out_index = outputComboBox.currentIndex
                     in_var = "--capture=" + internal_input_list[in_index]
@@ -262,14 +305,19 @@ ColumnLayout{
                     argz = ["-l", "32", "-n", "loopback", "-m", "[FL FR]", in_var, out_var]
                     pw_loopback.startDetached("pw-loopback", argz)
                 }
+                }
             }
 
              
             PlasmaComponents3.Label {
+                  Layout.alignment: Qt.AlignLeft
+            Layout.rightMargin:60
                 text: i18n("Independent Outputs")
                 height:20
             }
             RowLayout{
+                id: upper_left_row2
+                
                 PlasmaComponents3.ComboBox {
                     implicitWidth: 250
                     height: 30
@@ -286,16 +334,46 @@ ColumnLayout{
                     property var argz: {}
                     property var in_index: {}
                     property var out_index: {}
+                    property string  big_string2: ""
                     width:60
-                    text: i18n("<== ")
-                    autoExclusive: true
+                    text: i18n("< ")
+                    autoExclusive: false
                     onClicked: {
+
+
+
+
                         in_index = inputComboBox.currentIndex
                         out_index = outputComboBox.currentIndex
                         in_var = "--capture=" + internal_input_list[in_index]
                         out_var = "--playback=" + internal_output_list[out_index]
                         argz = ["-l", "32", "-n", "loopback", "-m", "[FL FR]", playback_props, out_var]
+
+
+
+                         if (checked == false){
+                            
+                            destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
+
+                            for(var i = 0; i < runningRadioGroup.children.length; ++i){
+                                var child = runningRadioGroup.children[i];
+                                if( child instanceof PlasmaComponents3.RadioButton && child.text === out_var){
+                                    child.destroy();
+                                    break;
+                                }
+
+
+                            }
+                            
+
+
+                        }else{
                         pw_loopback.startDetached("pw-loopback", argz)
+
+                         big_string2 = 'import org.kde.plasma.components 3.0; RadioButton { autoExclusive: false; checked: true; property var in_index: {}; property var out_index: {}; property var in_var: {}; property var out_var: {}; onClicked: {  } }'
+                        var radioBtn = Qt.createQmlObject(big_string2, runningRadioGroup);
+                        radioBtn.text = out_var
+                    }
                     }
                 }
 
@@ -303,76 +381,64 @@ ColumnLayout{
         }
         ColumnLayout {
             id: upperRightQuad
+            Layout.alignment: Qt.AlignTop
             PlasmaComponents3.Label {
+                Layout.alignment: Qt.AlignLeft
                 text: i18n("Default Output")
-                height:60
+                
                 
             }
-             PlasmaComponents3.Label {
-                text: i18n(  getDefaultOutput())
-                height:60
+
+            RowLayout{
+                id:upper_right_row1
+              
+             PlasmaComponents3.ComboBox {
+                model:[ getDefaultOutput()]
+                Layout.preferredHeight:30
+                enabled: false
+                implicitWidth:250
                 
+            }
             }
              PlasmaComponents3.RadioButton {
              width: 400
-             height:120
+                Layout.topMargin:20
+                Layout.alignment: Qt.AlignRight
              text: i18n(getLoopbackText() ) 
-            autoExclusive: true
+            autoExclusive: false
             onClicked: {
+                     if (checked == false){
+                            
+                            destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
+                     }else{
                 pw_loopback.startDetached("pw-loopback",["-l","32"])
+                     }
             }
         }
             PlasmaComponents3.Label {
+                Layout.alignment: Qt.AlignLeft
                 text: i18n("Default Input")
-                height:60
+                 
                 
             }
-             PlasmaComponents3.Label {
-                text: i18n(  getDefaultInput())
-                height:60
+            RowLayout{
+                id:upper_right_row2
                 
+             PlasmaComponents3.ComboBox {
+                model: [ getDefaultInput()]
+                implicitWidth:250
+                enabled:false
+                   Layout.preferredHeight:30
+                
+            }
             }
 
          
         }
     }
     RowLayout{
-        id:prim_row2
 
-
-        ColumnLayout{
-                id:lowerLeftQuad
-                implicitWidth:500
-             
-                Column{
-                id: runningRadioGroup
-                PlasmaComponents3.Label {
-                    text: i18n("Running")
-                    height: 35
-                    width:500
-                }
-            }
-
-
-
-
-
-
-
-        }
-        ColumnLayout {  
-            id:lowerRightQuad
-
-
-            Column{
-                id: radioGroup
-                PlasmaComponents3.Label {
-                    text: i18n("Favorites")
-                    height: 35
-                }
-            }
-            property string custom_name:""      
-            PlasmaComponents3.Button {
+      PlasmaComponents3.Button {
                 Layout.alignment: Qt.AlignRight
                 property string in_var: ""
                 property string out_var: ""
@@ -390,7 +456,7 @@ ColumnLayout{
                     out_var2 = output_list[out_index]
                     in_var = "--capture=" + internal_input_list[in_index]
                     out_var = "--playback=" + internal_output_list[out_index]
-                    big_string = 'import QtQuick.Controls 2.0; RadioButton { property var in_index: {}; property var out_index: {}; property var in_var: {}; property var out_var: {}; onClicked: { in_index = inputComboBox.currentIndex; out_index = outputComboBox.currentIndex; pw_loopback.startDetached("pw-loopback", ["-l", "32", "-n", "loopback", "-m", "[FL FR]", "' + in_var + '", "' + out_var + '" ]); } }'
+                    big_string = 'import org.kde.plasma.components 3.0; RadioButton { autoExclusive: false ; property var in_index: {}; property var out_index: {}; property var in_var: {}; property var out_var: {}; onClicked: { in_index = inputComboBox.currentIndex; out_index = outputComboBox.currentIndex; pw_loopback.startDetached("pw-loopback", ["-l", "32", "-n", "loopback", "-m", "[FL FR]", "' + in_var + '", "' + out_var + '" ]); } }'
                     popup.open()
                     }
             }
@@ -412,8 +478,12 @@ ColumnLayout{
                     }
                 }
             }
+
+
+
             PlasmaComponents3.RadioButton {
                 width: 200
+                Layout.alignment: Qt.AlignRight
                 text: i18n("Off")
                 checked: true
                 autoExclusive: true
@@ -421,6 +491,46 @@ ColumnLayout{
                     destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
                 }
             }
+
+
+    }
+    RowLayout{
+        id:prim_row2
+
+
+        ColumnLayout{
+                id:lowerLeftQuad
+                implicitWidth:300
+             
+                Column{
+                id: runningRadioGroup
+                PlasmaComponents3.Label {
+                    text: i18n("Running")
+                    height: 35
+                    width:300
+                }
+            }
+                 Column{
+                id: radioGroup
+                PlasmaComponents3.Label {
+                    text: i18n("Favorites")
+                    height: 35
+                }
+            }
+
+
+
+
+
+
+        }
+        ColumnLayout {  
+            id:lowerRightQuad
+
+
+       
+              
+      
 
 
 
@@ -450,13 +560,13 @@ ColumnLayout{
                 text: "Save"
                 onClicked:{
 
-                 lowerRightQuad.custom_name = textField.text//save the name   
+                 custom_name = textField.text//save the name   
                  //print(custom_name)
                      var radioBtn = Qt.createQmlObject(newy.big_string, radioGroup);
             
             radioBtn.text = newy.in_var2 + " + " + newy.out_var2;
 
-            radioBtn.text = lowerRightQuad.custom_name
+            radioBtn.text = custom_name
             radioBtn.checked = true;
             radioBtn.in_var = newy.in_var;
             radioBtn.out_var = newy.out_var;
