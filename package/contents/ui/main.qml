@@ -10,6 +10,7 @@ import com.github.nofunever.pw_monitor_tool 1.0
 import QtQuick.LocalStorage 2.0
 import org.kde.kcoreaddons 1.0 as Kcoreaddons
 import QtMultimedia 5.12
+import "."
 
 ColumnLayout{
     
@@ -25,6 +26,8 @@ ColumnLayout{
     property var output_list: {}
     property var internal_input_list: {}
     property var internal_output_list: {}
+      property var in_index: {}
+                property var out_index: {}
     property string capture_props:"--capture-props='[media.class=Audio/Sink]'"
     property string playback_props:"--playback-props='[media.class=Audio/Source]'"
     property alias defaultInputDeviceName: audioDeviceInfo.defaultInputDeviceName
@@ -62,6 +65,18 @@ ColumnLayout{
 
     Kprocess {
         id: destroy
+
+        property string output: ""
+
+        onStarted: print("Started destroy")
+        onFinished: print("Closed destroy")
+        onErrorOccurred: console.log("destroy Error Ocuured: ", error)
+        onReadyReadStandardOutput: {
+            output = destroy.readAll()
+        }
+    }
+        Kprocess {
+        id: destroy2
 
         property string output: ""
 
@@ -132,18 +147,8 @@ ColumnLayout{
     }
     }
 
-   // Connections {
-   //     target: root
-    //    function onDefaultInputDeviceNameChanged() {
-   //         root.getLoopbackText();
-    //    }
-   //     function onDefaultOutputDeviceNameChanged() {
-    //        root.getLoopbackText();
-    //    }
- //   }
     Component.onCompleted: {
 
-        
         destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ', ' | cut -c 5- )"])
        
         list_devices.start("bash", ["-c", "pw-cli ls Node | grep -B 3 'Audio/Source' | grep 'node.description' | cut -d \\\" -f2 "])
@@ -182,18 +187,18 @@ ColumnLayout{
             var rs = tx.executeSql("SELECT * FROM favorites");
             for (var i = 0; i < rs.rows.length; i++) {
                 var favorite = rs.rows.item(i);
-                var big_string = "";
-
-                big_string = 'import org.kde.plasma.components 3.0; RadioButton { property var in_var: {}; property var out_var: {}; onClicked: { pw_loopback.startDetached("pw-loopback", ["-l", "32", "-n", "loopback", "-m", "[FL FR]", "' + favorite.in_var + '", "' + favorite.out_var + '" ]); } }'
-
-                var radioBtn = Qt.createQmlObject(big_string, radioGroup);
+                var component = Qt.createComponent("CustomFavoriteRadioButton.qml");
+                //if (component.status === Qt.Ready) {
+                var radioBtn = component.createObject(radioGroup);
                 radioBtn.text = favorite.name;
-                radioBtn.in_var = favorite.in_var;
-                radioBtn.out_var = favorite.out_var
+                radioBtn.customInVar = favorite.in_var;
+                radioBtn.customOutVar = favorite.out_var;
+
+                
             }
         });
 
-//        inputComboBox.width = findMaxWidth(input_list) + 30; // Add extra padding for the dropdown arrow
+
     }
 
 
@@ -207,8 +212,6 @@ ColumnLayout{
         text: i18n("Pipewire Loopback UI")
         height: 30
     }
-
-
 
     RowLayout{
         id:prim_row1
@@ -238,7 +241,6 @@ ColumnLayout{
                     }
                 }
 
-                
                 PlasmaComponents3.RadioButton {
                     property var in_var: {}
                     property var out_var: {}
@@ -249,8 +251,6 @@ ColumnLayout{
                     property var pid:-1
                     width: 60
                     id:inindefout
-
-                            
                     text: i18n(">")
                     autoExclusive: false
                     onClicked: {
@@ -259,10 +259,10 @@ ColumnLayout{
                             in_var = "--capture=" + internal_input_list[in_index]
                          // print(pid)
                           print(processPids)
-                            destroy.startDetached("kill",[-9,processPids[0]]);
+                            destroy.startDetached("kill",[-9,pid]);
                             //processPids[0].pop()
 
-                            removePid(processPids[0]) 
+                            removePid(pid) 
 
 
                             for(var i = 0; i < runningRadioGroup.children.length; ++i){
@@ -271,12 +271,7 @@ ColumnLayout{
                                     child.destroy();
                                     break;
                                 }
-
-
                             }
-                            
-
-
                         }else{
 
                         in_index = inputComboBox.currentIndex
@@ -318,31 +313,34 @@ ColumnLayout{
 
 
                      if (checked == false){
-                            
-                            destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
-                                  for(var i = 0; i < runningRadioGroup.children.length; ++i){
+                              // print(pid)
+                          print(processPids)
+                            destroy.startDetached("kill",[-9,pid]);
+                            //processPids[0].pop()
+
+                            removePid(pid)   
+                       //     destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
+                            for(var i = 0; i < runningRadioGroup.children.length; ++i){
                                 var child = runningRadioGroup.children[i];
                                 if( child instanceof PlasmaComponents3.RadioButton && child.text === in_var + " + " + out_var){
                                     child.destroy();
                                     break;
                                 }
-
-
                             }
 
 
-                     }else{
-                    in_index = inputComboBox.currentIndex
-                    out_index = outputComboBox.currentIndex
-                    in_var = "--capture=" + internal_input_list[in_index]
-                    out_var = "--playback=" + internal_output_list[out_index]
-                    argz = ["-l", "32", "-n", "loopback", "-m", "[FL FR]", in_var, out_var]
-                    pid = pw_loopback.startDetached("pw-loopback", argz)
-                      processPids.push(pid)
-                     big_string2 = 'import org.kde.plasma.components 3.0; RadioButton { autoExclusive: false; checked: true; property var in_index: {}; property var out_index: {}; property var in_var: {}; property var out_var: {}; onClicked: {  } }'
+                    }else{
+                        in_index = inputComboBox.currentIndex
+                        out_index = outputComboBox.currentIndex
+                        in_var = "--capture=" + internal_input_list[in_index]
+                        out_var = "--playback=" + internal_output_list[out_index]
+                        argz = ["-l", "32", "-n", "loopback", "-m", "[FL FR]", in_var, out_var]
+                        pid = pw_loopback.startDetached("pw-loopback", argz)
+                        processPids.push(pid)
+                        big_string2 = 'import org.kde.plasma.components 3.0; RadioButton { autoExclusive: false; checked: true; property var in_index: {}; property var out_index: {}; property var in_var: {}; property var out_var: {}; onClicked: {  } }'
                         var radioBtn = Qt.createQmlObject(big_string2, runningRadioGroup);
                         radioBtn.text = in_var + " + " + out_var;
-                }
+                    }
                 }
             }
 
@@ -393,7 +391,11 @@ ColumnLayout{
 
                          if (checked == false){
                             
-                            destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
+                            print(processPids)
+                            destroy.startDetached("kill",[-9,pid]);
+                            //processPids[0].pop()
+
+                            removePid(pid) 
 
                             for(var i = 0; i < runningRadioGroup.children.length; ++i){
                                 var child = runningRadioGroup.children[i];
@@ -454,7 +456,11 @@ ColumnLayout{
                      
                      if (checked == false){
                             
-                            destroy.start("bash", ["-c", "pw-cli destroy $(pw-cli ls Node | grep -B 4 'loopback' | head -n 1 | cut -f1 -d ',' | cut -c 5- )"])
+                           print(processPids)
+                            destroy.startDetached("kill",[-9,pid]);
+                            //processPids[0].pop()
+
+                            removePid(pid) 
                             for(var i = 0; i < runningRadioGroup.children.length; ++i){
                                 var child = runningRadioGroup.children[i];
                                 if( child instanceof PlasmaComponents3.RadioButton && child.text ===  "Defaults: pw-loopback"){
@@ -503,8 +509,7 @@ ColumnLayout{
                 property string out_var: ""
                 property var in_var2: {}
                 property var out_var2: {}
-                property var in_index: {}
-                property var out_index: {}
+              
                 property string big_string: ""
                 id: newy
                 Layout.leftMargin:10
@@ -516,7 +521,7 @@ ColumnLayout{
                     out_var2 = output_list[out_index]
                     in_var = "--capture=" + internal_input_list[in_index]
                     out_var = "--playback=" + internal_output_list[out_index]
-                    big_string = 'import org.kde.plasma.components 3.0; RadioButton { autoExclusive: false ; property var in_index: {}; property var out_index: {}; property var in_var: {}; property var out_var: {}; onClicked: { in_index = inputComboBox.currentIndex; out_index = outputComboBox.currentIndex; pw_loopback.startDetached("pw-loopback", ["-l", "32", "-n", "loopback", "-m", "[FL FR]", "' + in_var + '", "' + out_var + '" ]); } }'
+                    big_string = 'import org.kde.plasma.components 3.0; RadioButton { autoExclusive: false ; property var in_index: {}; property var out_index: {}; property var in_var: {}; property var out_var: {}; property var pid: -1;  onClicked: { in_index = inputComboBox.currentIndex; out_index = outputComboBox.currentIndex; pid = pw_loopback.startDetached("pw-loopback", ["-l", "32", "-n", "loopback", "-m", "[FL FR]", "' + in_var + '", "' + out_var + '" ]); } }'
                     popup.open()
                     }
             }
@@ -671,20 +676,22 @@ ColumnLayout{
                 onClicked:{
 
                  custom_name = textField.text//save the name   
-                 //print(custom_name)
-                     var radioBtn = Qt.createQmlObject(newy.big_string, radioGroup);
-            
-            radioBtn.text = newy.in_var2 + " + " + newy.out_var2;
-
-            radioBtn.text = custom_name
-            radioBtn.checked = true;
-            radioBtn.in_var = newy.in_var;
-            radioBtn.out_var = newy.out_var;
-
-            favoritesDB.transaction(function(tx) {
+           var component = Qt.createComponent("CustomFavoriteRadioButton.qml");
+//if (component.status === Qt.Ready) {
+    var radioBtn = component.createObject(radioGroup);
+    radioBtn.text = custom_name;
+    radioBtn.customInVar = newy.in_var;
+    radioBtn.customOutVar = newy.out_var;
+      favoritesDB.transaction(function(tx) {
                 tx.executeSql("INSERT INTO favorites VALUES(?, ?, ?)", [radioBtn.text, newy.in_var, newy.out_var]);
             });
                 popup.close()
+//} else {
+ //   console.error("Error creating CustomFavoriteRadioButton:", component.errorString());
+ //   console.log("Component status:", component.status);
+//}
+
+          
                 } 
                 
             }

@@ -1,5 +1,6 @@
 /usr/share/plasma/plasmoids/com.github.nofunever.pw_monitor_tool/contents/ui/configGeneral.qml
 /usr/share/plasma/plasmoids/com.github.nofunever.pw_monitor_tool/contents/ui/main.qml
+/usr/share/plasma/plasmoids/com.github.nofunever.pw_monitor_tool/contents/ui/CustomFavoriteRadioButton.qml
 /usr/share/plasma/plasmoids/com.github.nofunever.pw_monitor_tool/contents/ui/.main.qml.kate-swp
 /usr/share/plasma/plasmoids/com.github.nofunever.pw_monitor_tool/contents/ui/.main.qml.swp
 /usr/share/plasma/plasmoids/com.github.nofunever.pw_monitor_tool/contents/config/main.xml
