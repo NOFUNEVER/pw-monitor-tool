@@ -191,7 +191,7 @@ ColumnLayout{
 
 
 ColumnLayout{
-    anchors.fill:parent
+    
     id: root
     
     PlasmaComponents3.Label {
@@ -220,12 +220,12 @@ ColumnLayout{
                 id:upper_left_row1
                 PlasmaComponents3.ComboBox {
                     height:30
-                    implicitWidth:250
+                    implicitWidth:260
                     id: inputComboBox       
                     model: input_list
                     delegate: ItemDelegate {
                         text: modelData
-                        width:200
+                        width:260
                     }
                 }
 
@@ -334,7 +334,7 @@ ColumnLayout{
                 id: upper_left_row2
                 
                 PlasmaComponents3.ComboBox {
-                    implicitWidth: 250
+                    implicitWidth: 260
                     height: 30
                     id: outputComboBox
                     model: output_list
@@ -477,6 +477,7 @@ ColumnLayout{
                 property var out_index: {}
                 property string big_string: ""
                 id: newy
+                Layout.leftMargin:10
                 text: qsTr("Add Favorite")
                     onClicked: {
                     in_index = inputComboBox.currentIndex
@@ -511,7 +512,7 @@ ColumnLayout{
 
 
             PlasmaComponents3.RadioButton {
-                width: 200
+                width: 20
                 Layout.alignment: Qt.AlignRight
                 text: i18n("Off")
                 checked: true
