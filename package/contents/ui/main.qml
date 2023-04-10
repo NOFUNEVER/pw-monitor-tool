@@ -15,7 +15,7 @@ import "."
 ColumnLayout{
     
     
-    width: 600
+    width: 800
     height: 600
 
    
@@ -633,23 +633,9 @@ ColumnLayout{
                 }
             }
 
-
-
-
-
-
         }
         ColumnLayout {  
             id:lowerRightQuad
-
-
-       
-              
-      
-
-
-
-
 
         }
     }
@@ -687,15 +673,15 @@ ColumnLayout{
             });
                 popup.close()
 //} else {
- //   console.error("Error creating CustomFavoriteRadioButton:", component.errorString());
- //   console.log("Component status:", component.status);
+  // console.error("Error creating CustomFavoriteRadioButton:", component.errorString());
+ // console.log("Component status:", component.status);
 //}
 
           
                 } 
                 
             }
-        }
+        }g
     }
         
 
